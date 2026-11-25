@@ -88,6 +88,29 @@ The audit tests also confirm that verification fails when an event is altered, r
 
 **Next steps after a pilot agreement:** connect to land-record and Farmer ID APIs instead of photos, add a branch renewal sweep that flags existing accounts moving to the new rules, and move the audit log to bank-controlled storage.
 
+## Where Saakh fits
+
+KCC lending is already being digitised. Saakh does not compete with that plumbing. It adds the step the plumbing leaves to the officer: appraising the case under the new rules.
+
+| What exists | What it does | Where Saakh fits |
+|---|---|---|
+| NABARD e-KCC portal (built by 24x7 Moneyworks; over 3 lakh KCC applications onboarded at cooperative banks and RRBs) | Digital loan origination: application, documents, workflow, disbursal | Saakh computes and checks the limit inside that workflow, cited to the 2026 Directions, and hands back the figures and the audit trail |
+| e-PACS ERP (about 61,000 PACS computerised by Feb 2026) | Accounts, membership, deposits, loan ledger for PACS | The PACS secretary is Saakh's main user. Saakh runs on the same phone or PC and exports the case as JSON for the ERP. |
+| RBIH Public Tech Platform for Frictionless Credit / ULI, state land-record APIs | Fetches land records and other data by consent | Replaces Saakh's photo step once a bank has access. The engine, risk rules and audit log stay the same. |
+| Satellite and alternative-data underwriters (e.g. SatSure, Samunnati, Jai Kisan) | Scores the farm or the farmer from imagery and history | Different question. They estimate risk; Saakh computes the regulated limit and checks the file. A bank can use both. |
+
+Nothing I found computes a KCC limit to the paragraphs of the RBI KCC Directions, 2026, explains it to the farmer in their language, and leaves a record an inspector can verify. Every lender has to change its limit calculation by 1 January 2027, and that is the gap Saakh fills.
+
+## Business model
+
+These are working assumptions, not validated with a bank yet.
+
+- **Who pays:** the lender, not the farmer. A DCCB or state cooperative bank buys Saakh for its PACS and branches. RRBs and small finance banks buy it per branch.
+- **How:** an annual licence per PACS or branch, sold through the channels that already reach them: state cooperative banks, NABARD's digitisation programmes and the e-KCC and ERP vendors.
+- **Size of the first market:** about 61,000 computerised PACS plus the branches of 28 RRBs and about 350 DCCBs. At an illustrative ₹6,000 per PACS per year, PACS alone would be about ₹37 crore a year.
+- **Costs:** the engine runs on the device. Model and speech calls cost a few rupees per case at current Claude and Sarvam prices, and a bank can choose its own model providers.
+- **Why now:** the Directions apply to every fresh sanction from 1 January 2027, and every renewal after that moves to the new method. Lenders need the change done before then.
+
 ## 2036 vision
 
 By 2036 I want every KCC sanction in India to come with a machine-checkable trail. That means the inputs, the rule paragraph behind each rupee, the model calls that read the documents and the officer who signed. The farmer should hear the explanation in their own language before signing. Lenders and regulators should be able to rerun any decision and get the same number. If AI agents become a normal part of credit, something has to hold them to account. I think that is a deterministic engine with cited rules and a human sign-off, and that is what Saakh builds.

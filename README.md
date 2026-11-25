@@ -24,6 +24,10 @@ The rule behind all of it: **AI handles words. The engine handles numbers. The o
 
 **Real mode** starts empty. Photograph your own land record and speak the crop plan into the phone.
 
+## Where it fits
+
+NABARD's e-KCC portal and the e-PACS ERP already digitise the loan application and the society's ledger. Saakh adds the step they leave to the officer: appraising the case to the 2026 Directions, explaining it to the farmer, and leaving a record an inspector can check. Once a bank has access to land-record APIs such as RBIH's platform, those replace the photo step. Landscape and business model: [docs/impact-case.md](docs/impact-case.md#where-saakh-fits).
+
 ## Screenshots
 
 On a Samsung phone, against the live site:
