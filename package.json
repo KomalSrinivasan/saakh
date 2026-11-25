@@ -6,14 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test \"src/**/*.test.ts\"",
+    "check:dash": "! git grep -nI --untracked $'\\xe2\\x80\\x94' -- src specs public docs README.md",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && pnpm strip-env && opennextjs-cloudflare deploy",
+    "strip-env": "node -e \"require('fs').writeFileSync('.open-next/cloudflare/next-env.mjs','export const production = {};export const development = {};export const test = {};')\""
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.108",
+    "@ai-sdk/react": "^4.0.186",
+    "ai": "^7.0.181",
     "next": "16.4.6",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.19",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -21,7 +31,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.168.0"
   },
   "packageManager": "pnpm@10.26.1"
 }
