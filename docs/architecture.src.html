@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saakh Architecture</title>
+<style>
+@font-face { font-family: "Virgil"; src: url(data:font/woff2;base64,__VIRGIL__) format("woff2"); font-display: block; }
+:root {
+  --paper: #ffffff; --ink: #1e1e1e; --muted: #6b6b6b; --dot: #dcdcdc;
+  --select: #6965db; --chip: #f4f4f6;
+  --hand: "Virgil", "Segoe Print", "Comic Sans MS", cursive;
+  --ui: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--paper); color: var(--ink); font-family: var(--ui); display: flex; flex-direction: column; }
+header { display: flex; align-items: center; gap: 16px 24px; flex-wrap: wrap; padding: 14px 24px 10px; border-bottom: 1.5px dashed #cfcfd6; }
+h1 { font: 400 1.7rem/1.1 var(--hand); margin: 0; }
+h1 small { display: block; font: .8rem var(--ui); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+button { font: 1rem var(--hand); color: var(--ink); background: var(--chip); border: 1.5px solid var(--ink); border-radius: 10px 12px 9px 13px; padding: 6px 14px; cursor: pointer; box-shadow: 2px 2px 0 var(--ink); transition: transform .1s, box-shadow .1s; }
+button:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+button:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--ink); }
+button:focus-visible { outline: 3px solid var(--select); outline-offset: 2px; }
+button[aria-selected="true"] { background: #e5dbff; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; padding: 8px 24px 0; font: .95rem var(--hand); color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 18px; height: 12px; border: 1.5px solid; border-radius: 3px; display: inline-block; }
+main { flex: 1; min-height: 0; display: flex; padding: 8px 16px; background-image: radial-gradient(var(--dot) 1.2px, transparent 1.2px); background-size: 22px 22px; }
+svg#canvas { width: 100%; height: 100%; min-height: 360px; display: block; }
+svg text { font-family: var(--hand); fill: var(--ink); }
+.n, .e { transition: opacity .35s ease; }
+.ring { opacity: 0; transition: opacity .3s; }
+.on .ring { opacity: 1; }
+@keyframes pop { from { opacity: 0; transform: translateY(8px); } }
+.enter { animation: pop .45s ease backwards; transform-box: fill-box; }
+@media (prefers-reduced-motion: reduce) { .enter { animation: none; } .n, .e, .ring { transition: none; } }
+footer { display: flex; align-items: center; gap: 12px 20px; flex-wrap: wrap; padding: 10px 24px 16px; border-top: 1.5px dashed #cfcfd6; }
+#caption { flex: 1 1 380px; font: 1.15rem/1.35 var(--hand); min-height: 2.7em; display: flex; align-items: center; }
+#count { font: .85rem var(--ui); color: var(--muted); letter-spacing: .06em; min-width: 70px; }
+.ctrl { display: flex; gap: 8px; flex-wrap: wrap; }
+kbd { font: .75rem var(--ui); border: 1px solid #bbb; border-radius: 4px; padding: 1px 5px; color: var(--muted); }
+.hint { font: .8rem var(--ui); color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1><small>BUILD 2036 · Kisan Credit Card appraisal</small>Saakh (साख) · Architecture</h1>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+</header>
+<div class="legend" aria-label="Colour legend">
+  <span><i style="background:#a5d8ff;border-color:#1971c2"></i>officer screens</span>
+  <span><i style="background:#b2f2bb;border-color:#2f9e44"></i>engine &amp; on-device data</span>
+  <span><i style="background:#d0bfff;border-color:#6741d9"></i>AI models</span>
+  <span><i style="background:#ffd8a8;border-color:#e8590c"></i>server</span>
+  <span><i style="background:#ffec99;border-color:#f08c00"></i>checks</span>
+  <span><i style="background:#ffc9c9;border-color:#e03131"></i>human decision</span>
+  <span><i style="background:#e9ecef;border-color:#495057"></i>platform</span>
+</div>
+<main><svg id="canvas" role="img" aria-label="Saakh architecture diagram"></svg></main>
+<footer>
+  <div id="count"></div>
+  <div id="caption" aria-live="polite"></div>
+  <div class="ctrl">
+    <button id="prev" title="Previous (←)">◀ Back</button>
+    <button id="next" title="Next (→)">Next ▶</button>
+    <button id="play" title="Auto play (Space)">Play</button>
+    <button id="all" title="Show whole flow (Esc)">Show all</button>
+    <button id="fs" title="Full screen (F)">Present</button>
+  </div>
+  <span class="hint">click any box for detail · <kbd>←</kbd> <kbd>→</kbd> step · <kbd>Space</kbd> play · <kbd>F</kbd> full screen</span>
+</footer>
+
+<script>/*__ROUGH__*/</script>
+<script>
+const C = {
+  blue: ["#a5d8ff", "#1971c2"], green: ["#b2f2bb", "#2f9e44"], violet: ["#d0bfff", "#6741d9"],
+  orange: ["#ffd8a8", "#e8590c"], yellow: ["#ffec99", "#f08c00"], red: ["#ffc9c9", "#e03131"], grey: ["#e9ecef", "#495057"],
+};
+const N = (id, x, y, w, h, label, sub, color, shape = "rect") => ({ id, x, y, w, h, label, sub, color, shape });
+const E = (from, fs, to, ts, o = {}) => ({ from, fs, to, ts, ...o });
+
+const DIAGRAMS = {
+  system: {
+    tab: "System architecture", vb: [1740, 1000],
+    intro: "Phone app, two thin server routes, and two AI providers. The rules engine runs on the phone and decides every rupee; the agent explains and checks, and a harness checks the agent. Press Next to walk through it, or click any box.",
+    frames: [
+      { x: 200, y: 30, w: 650, h: 900, label: "Officer's phone (installable web app)" },
+      { x: 885, y: 30, w: 370, h: 900, label: "Server routes (keys live here)" },
+      { x: 1290, y: 30, w: 430, h: 900, label: "AI providers" },
+    ],
+    nodes: [
+      N("officer", 30, 270, 150, 90, "Officer", "PACS · RRB · co-op", "blue", "ellipse"),
+      N("ui", 240, 250, 240, 130, "Saakh app", "Next.js web app\n6 steps per case", "blue"),
+      N("sw", 240, 80, 240, 90, "Service worker", "app shell works offline", "grey"),
+      N("sof", 570, 90, 250, 95, "Scale of Finance", "MP proxy table\n+ bank CSV upload", "green"),
+      N("engine", 570, 250, 250, 125, "RBI rules engine", "decides every rupee\ncites the paragraph", "green"),
+      N("cases", 570, 430, 250, 90, "Cases", "stored on the device", "green"),
+      N("audit", 570, 580, 250, 120, "Audit log", "SHA-256 hash chain\nverify · export JSON", "green"),
+      N("decide", 240, 600, 240, 110, "Officer decides", "approve · edit · reject", "red"),
+      N("keys", 915, 110, 310, 90, "API keys", "server environment only", "grey"),
+      N("route", 915, 330, 310, 140, "AI route", "land · crops · note\ntts · translate\ninput limits + 20 s timeout", "orange"),
+      N("check", 915, 600, 310, 120, "Figure check", "every rupee in the note\nmust exist in engine output", "yellow"),
+      N("stt", 1320, 80, 370, 90, "Sarvam Saaras v4", "speech to text, 22 Indian languages", "violet"),
+      N("vision", 1320, 195, 370, 90, "Sarvam Vision", "OCR: first of two land readers", "violet"),
+      N("trans", 1320, 310, 370, 90, "Sarvam Mayura / Translate", "22 languages: questions, summaries,\nagent report", "violet"),
+      N("tts", 1320, 425, 370, 90, "Sarvam Bulbul v3", "speaks the summary to the farmer", "violet"),
+      N("claude", 1320, 580, 370, 140, "Claude Sonnet 5.5", "land fields (second reader: vision),\ncrop lines, note draft,\nappraisal agent tool loop", "violet"),
+      N("agent", 915, 770, 310, 135, "Agent route", "7 tools · 8 harness checks\none repair, then review", "orange"),
+    ],
+    notes: [{ x: 240, y: 830, text: "no server database:\ncases + audit stay on the phone" }, { x: 1320, y: 790, text: "models read and write words,\nnever the limit" }, { x: 1320, y: 870, text: "Cloudflare Workers via OpenNext" }],
+    edges: [
+      E("officer", "r", "ui", "l"),
+      E("sw", "b", "ui", "t", { dashed: true }),
+      E("sof", "b", "engine", "t"),
+      E("ui", "r", "engine", "l"),
+      E("engine", "b", "cases", "t"),
+      E("ui", "b", "decide", "t"),
+      E("decide", "r", "audit", "l"),
+      E("ui", "r", "route", "l", { via: [[620, 405]], label: "photo · audio · case", labelAt: [760, 398] }),
+      E("keys", "b", "route", "t", { dashed: true }),
+      ...["stt", "vision", "trans", "tts"].map(p => E("route", "r", p, "l", { line: true })),
+      E("route", "r", "claude", "l", { line: true }),
+      E("claude", "l", "check", "r", { label: "draft", labelAt: [1272, 625] }),
+      E("check", "t", "route", "b", { label: "pass" }),
+      E("cases", "r", "agent", "l", { via: [[865, 760]], label: "case evidence", labelAt: [790, 830] }),
+      E("agent", "r", "claude", "l", { line: true }),
+    ],
+    details: {
+      officer: "A PACS secretary, RRB branch officer or co-op bank loan officer, sitting with the farmer. The officer picks a named profile on the device.",
+      ui: "One Next.js app, installable on Android or desktop. Each case runs six steps: land record, crop plan, confirm, limit with the agent review, note, decision. UI copy ships in 11 languages, English and Hindi fully tested. Tested end to end in Chrome on a Samsung Android phone.",
+      sw: "A hand-written service worker caches the app shell. Drafts persist on the device, so a dropped connection loses nothing.",
+      sof: "Bundled Madhya Pradesh table for Indore, Sehore, Ujjain, Dewas and Dhar, seven crops. Values are PMFBY sum-insured proxies and are labelled proxy everywhere. A bank can upload its official table as CSV.",
+      engine: "Pure TypeScript, no network, no model. Implements paras 6, 8, 10, 13(1) to 13(7), 19, 23 to 25, 29 and 30 of the RBI KCC Directions, 2026. Every step carries its paragraph.",
+      cases: "Cases, officer profile and uploaded tables live in the browser's local storage. No server database, no farmer data at rest on a server. Other cases on the device are sent with each agent run so it can spot a survey number financed twice.",
+      audit: "Each event stores the hash of the previous one. Changing any past record breaks the chain, and Verify chain shows where. Each agent run is an event with its recommendation, checks passed, risk codes and models, not the raw evidence. Exportable as JSON.",
+      decide: "Only the officer can approve, edit or reject. Edit and reject need a written reason. A decided case is locked.",
+      keys: "The Sarvam and Anthropic keys sit in server environment variables on Cloudflare Workers. The phone never sees them.",
+      route: "One route with five actions. It checks file types and sizes, language codes and request size, and stops every provider call after 20 seconds.",
+      check: "Before a draft reaches the officer, every rupee figure in it is matched against the engine result. One redraft is allowed; if figures still do not match, the draft is refused.",
+      stt: "Saaras v4 transcribes the farmer in their language and also returns an English rendering. Crop names from the Scale of Finance table are passed as key terms.",
+      vision: "Sarvam Vision OCR reads the land record photo and Claude structures the text. At the same time Claude vision reads the photo directly. The two reads are reconciled field by field, and a disagreement becomes a READ_DISAGREE risk.",
+      trans: "Mayura for 11 languages, Sarvam-Translate for the rest of the 22. Translates follow-up questions, the farmer summary and the agent report. An agent translation is kept only if it has the same numbers as the English.",
+      tts: "Turns the farmer summary into speech so the officer can play it to the farmer.",
+      claude: "Returns JSON constrained by a schema: land fields, crop lines mapped to Scale of Finance keys, follow-up questions, and the sanction note. Also runs the appraisal agent loop. Never asked to compute money.",
+      agent: "The appraisal agent: Vercel AI SDK v7 ToolLoopAgent with Claude Sonnet 5.5, streaming its trace to the phone. Its 7 tools take case evidence only. A harness of 8 deterministic checks verifies the report; one repair turn, then it is downgraded to review.",
+    },
+    steps: [
+      { ids: ["officer", "ui", "sw"], text: "The officer opens Saakh on a phone. It installs like an app and the shell works offline." },
+      { ids: ["ui", "route", "keys"], text: "Photos, audio and case data go to one server route. API keys live only on the server." },
+      { ids: ["route", "stt", "vision", "trans", "tts"], text: "Sarvam handles Indian-language speech, document reading, translation and voice." },
+      { ids: ["route", "claude"], text: "Claude turns raw text into structured fields and drafts the note. It reads and writes words only." },
+      { ids: ["ui", "sof", "engine", "cases"], text: "On the phone, the RBI rules engine computes every rupee from confirmed inputs, with the paragraph for each step." },
+      { ids: ["cases", "agent", "claude"], text: "The agent route sends the confirmed case to Claude with 7 deterministic tools. A harness checks its report before the phone shows it." },
+      { ids: ["claude", "check", "route"], text: "Every rupee in the drafted note is checked against the engine output before the officer sees it." },
+      { ids: ["ui", "decide", "audit"], text: "The officer approves, edits or rejects. Every step lands in a tamper-evident audit log on the device." },
+    ],
+  },
+
+  flow: {
+    tab: "Officer flow", vb: [1740, 1000],
+    intro: "One appraisal from land record to audit, about the length of a conversation with the farmer.",
+    nodes: [
+      N("start", 30, 155, 150, 90, "Farmer at\nbranch", "", "blue", "ellipse"),
+      N("land", 220, 140, 230, 120, "1. Land record", "photo or upload\nkhasra · B1 · 7-12", "blue"),
+      N("ai1", 220, 340, 230, 110, "Read record twice", "Sarvam OCR + Claude\nand Claude vision", "violet"),
+      N("crops", 500, 140, 230, 120, "2. Crop plan", "farmer speaks in\nown language", "blue"),
+      N("ai2", 500, 340, 230, 110, "Transcribe + structure", "Saaras v4 + Claude\nfollow-up questions", "violet"),
+      N("manual", 780, 340, 230, 95, "Type it in", "if AI is down,\nnothing blocks", "grey"),
+      N("confirm", 780, 140, 230, 120, "3. Officer confirms", "edit any field,\nanswer follow-ups", "yellow"),
+      N("engine", 1060, 140, 240, 120, "4. Limit computed", "on device, each step\ncites its RBI para", "green"),
+      N("note", 1350, 140, 230, 120, "5. Sanction note", "officer's language\nfigures checked", "violet"),
+      N("speak", 1350, 340, 230, 110, "Farmer summary", "translated + spoken\nin farmer's language", "violet"),
+      N("agentRev", 1060, 330, 240, 120, "Agent review", "risks · what-ifs\nharness-checked", "violet"),
+      N("decide", 1060, 520, 240, 170, "6. Approve,\nedit or reject?", "", "red", "diamond"),
+      N("reason", 780, 560, 230, 95, "Reason required", "for edit or reject", "yellow"),
+      N("lock", 1060, 790, 240, 95, "Case locked", "no further changes", "grey"),
+      N("audit", 1380, 560, 300, 120, "Audit chain", "verify · export JSON\nevery step recorded", "green"),
+    ],
+    edges: [
+      E("start", "r", "land", "l"),
+      E("ai1", "t", "land", "b", { dashed: true, label: "fills fields" }),
+      E("land", "r", "crops", "l"),
+      E("ai2", "t", "crops", "b", { dashed: true, label: "fills crops" }),
+      E("crops", "r", "confirm", "l"),
+      E("manual", "t", "confirm", "b", { dashed: true, label: "or type it" }),
+      E("confirm", "r", "engine", "l"),
+      E("engine", "r", "note", "l"),
+      E("note", "b", "speak", "t"),
+      E("engine", "b", "agentRev", "t"),
+      E("agentRev", "b", "decide", "t"),
+      E("decide", "l", "reason", "r", { label: "edit / reject", labelAt: [1072, 545] }),
+      E("decide", "r", "audit", "l", { label: "approve", labelAt: [1340, 570] }),
+      E("decide", "b", "lock", "t"),
+    ],
+    details: {
+      land: "Photograph the land record or upload the sample. Supported records include B1, khasra, khatauni, 7-12, pahani and patta.",
+      ai1: "Two readers in parallel return owner, village, survey numbers, area (acre and bigha converted to hectares) and Aadhaar last 4 only. Each field shows whether both readers agree.",
+      crops: "The officer records up to 30 seconds of the farmer describing crops, seasons and area, or types what the farmer said.",
+      ai2: "Local crop names (chana, sarson, gehun) map to Scale of Finance crops. If a season claims more land than the record shows, Saakh asks a follow-up instead of accepting it.",
+      manual: "Every AI step has a manual path. If a provider fails, the officer can retry or enter the details by hand.",
+      confirm: "Nothing reaches the engine until the officer confirms. Extracted values are shown next to editable fields.",
+      engine: "Crop SoF x area, plus 10% post-harvest and 20% maintenance, plus insurance, rounded to Rs 1,000, then +10% per year for six years. Collateral, Flexi KCC and tenancy-proof checks follow.",
+      agentRev: "The agent runs risk rules and what-ifs, asks the officer questions if needed, and recommends approve, review or decline. A harness checks every figure first. The officer can answer and re-run.",
+      note: "Drafted in the officer's language, every rupee followed by its paragraph. Figures are checked against the engine output first.",
+      speak: "A short plain summary, translated into the farmer's language and played aloud.",
+      decide: "The officer decides. Saakh only recommends.",
+      reason: "An edit to the limit or a rejection cannot be saved without a written reason.",
+      lock: "Once decided, the case shows as closed and cannot be changed.",
+      audit: "Created, extracted, confirmed, computed, each AI call, note drafted, decision and export are all chained. Verify chain confirms nothing was altered.",
+    },
+    steps: [
+      { ids: ["start", "land", "ai1"], text: "Step 1: photograph the land record. Two AI readers read owner, survey numbers and area, and Aadhaar is masked to the last 4 digits." },
+      { ids: ["ai1", "crops", "ai2"], text: "Step 2: the farmer speaks the crop plan in their own language. AI transcribes it and maps crops, seasons and areas." },
+      { ids: ["ai2", "manual", "confirm"], text: "Step 3: the officer confirms or corrects every field. If AI is unavailable, the officer types it in." },
+      { ids: ["confirm", "engine"], text: "Step 4: the rules engine computes year-wise limits and the KCC limit, each step tagged with its RBI paragraph." },
+      { ids: ["engine", "agentRev"], text: "Still in step 4: the agent checks for risks, tries what-ifs and recommends. A harness verifies its report." },
+      { ids: ["engine", "note", "speak"], text: "Step 5: a sanction note in the officer's language, and a summary spoken to the farmer in theirs." },
+      { ids: ["decide", "reason", "lock"], text: "Step 6: the officer approves, edits or rejects. Edits and rejections need a reason. The case then locks." },
+      { ids: ["decide", "audit"], text: "Every step is in the audit chain. Verify it, or export it as JSON for an inspector." },
+    ],
+  },
+
+  agent: {
+    tab: "Appraisal agent", vb: [1740, 1000],
+    intro: "The agent plans and explains. Every number and every rule risk comes from a deterministic tool, and a harness checks the report before the officer sees it.",
+    nodes: [
+      N("evidence", 30, 260, 220, 110, "Confirmed case", "land fields · crops\nother cases on device", "blue"),
+      N("agent", 300, 250, 260, 140, "Appraisal agent", "Claude Sonnet 5.5\nAI SDK v7 tool loop\ntrace streams live", "violet"),
+      N("tSof", 640, 120, 290, 68, "Scale of Finance", "lookup_sof", "green"),
+      N("tKcc", 640, 200, 290, 68, "Compute limit", "compute_kcc", "green"),
+      N("tRisk", 640, 280, 290, 68, "15 risk rules", "run_risk_checks", "green"),
+      N("tCrop", 640, 360, 290, 68, "Crop plausibility", "check_crop_plan", "green"),
+      N("tWhat", 640, 440, 290, 68, "What-ifs", "what_if", "green"),
+      N("tAsk", 640, 520, 290, 68, "Ask the officer", "ask_officer", "blue"),
+      N("tFin", 640, 600, 290, 68, "Finish report", "finish", "grey"),
+      N("repair", 1010, 20, 300, 80, "One repair turn", "failed checks go back", "orange"),
+      N("harness", 1010, 280, 300, 130, "Harness", "8 deterministic checks\nresult, what-ifs, risks\ntaken from tools", "yellow"),
+      N("down", 1010, 520, 300, 100, "Downgrade to review", "template summary", "red"),
+      N("trans", 1400, 280, 310, 130, "Officer's language", "Sarvam translates;\nkept only if the\nnumbers match", "violet"),
+      N("report", 1400, 480, 310, 120, "Report on screen", "recommendation · risks\nwhat-ifs · questions", "blue"),
+      N("officer", 1400, 670, 310, 110, "Officer", "answers questions,\nthen decides", "red"),
+      N("audit", 1400, 850, 310, 100, "Audit chain", "agent_run event", "green"),
+    ],
+    notes: [{ x: 30, y: 430, text: "tools take evidence only:\nthe model cannot\npass a number in" }],
+    stickies: [
+      { id: "checks", x: 20, y: 540, w: 370, h: 300, color: "yellow", rot: -1, title: "Harness checks", lines: ["Rupee figures come from tools", "Result is the engine output", "No approve over an engine error", "No approve over a high risk", "No rule risk dropped", "Decline needs a reason", "Summary present", "Required tools ran"] },
+    ],
+    edges: [
+      E("evidence", "r", "agent", "l"),
+      ...["tSof", "tKcc", "tRisk", "tCrop", "tWhat", "tAsk", "tFin"].map(t => E("agent", "r", t, "l", { line: true })),
+      E("tFin", "r", "harness", "l"),
+      E("harness", "t", "repair", "b", { dashed: true, label: "fails once" }),
+      E("repair", "l", "agent", "t", { dashed: true, via: [[640, 40]] }),
+      E("harness", "b", "down", "t", { label: "fails again" }),
+      E("harness", "r", "trans", "l", { label: "pass" }),
+      E("trans", "b", "report", "t"),
+      E("down", "r", "report", "l"),
+      E("report", "b", "officer", "t"),
+      E("officer", "l", "agent", "b", { dashed: true, via: [[900, 860], [520, 720]], label: "answers, re-run", labelAt: [760, 880] }),
+      E("officer", "b", "audit", "t"),
+    ],
+    details: {
+      evidence: "The confirmed land fields from both readers, the crop plan, the district, and the other cases stored on the device (to spot a survey number financed twice).",
+      agent: "A ToolLoopAgent from the Vercel AI SDK v7 running Claude Sonnet 5.5, up to 10 steps. It must call compute_kcc and run_risk_checks before it can finish. It writes in English; its trace streams to the officer's screen.",
+      tSof: "Looks up the Scale of Finance rate for one crop in the case district, with its source (official bank table or PMFBY proxy), scope and reference.",
+      tKcc: "Runs the RBI rules engine on the confirmed case. The model passes no numbers; the tool reads the evidence itself.",
+      tRisk: "15 deterministic rules: name mismatch across Devanagari and Latin spellings (transliteration + Jaro-Winkler), Aadhaar, village, survey and area mismatch, the two land readers disagreeing, double financing, duplicate applicant, area over the holding, unknown crop, proxy or missing SoF, tenancy documents (para 30).",
+      tCrop: "Checks each crop against an indicative Madhya Pradesh crop calendar and district belts. Only cotton, garlic, summer moong and soybean belts are district-verified.",
+      tWhat: "Re-runs the engine with one change: recovery tie-up (para 25), smallest cut under Rs 2 lakh, pump-set term loan (para 19), PMFBY premium, or dropping crops with no SoF.",
+      tAsk: "Asks the officer something the evidence cannot settle, at most 3 questions. Each is also given in the farmer's language with read-aloud.",
+      tFin: "Submits the recommendation (approve, review or decline), confidence and summary. Only available once the required tools have run.",
+      repair: "If any check fails, the agent gets one more turn, with only finish available, and is told which checks failed.",
+      harness: "Verifies every report: figures from tools, result is the engine output, no approve over an engine error or high rule risk, every rule risk kept, decline backed by a high risk or engine error, summary present, required tools ran.",
+      down: "If checks still fail after the repair turn, the recommendation becomes review and the summary is replaced with a template built from the engine result and risks.",
+      trans: "Sarvam translates the summary, risks and what-ifs into the officer's language. A translation is kept only if its set of numbers equals the English one; otherwise English is shown.",
+      report: "Recommendation, rule risks, what-ifs with their RBI paragraph, questions, and the harness checks with pass or fail.",
+      officer: "The agent only recommends. The officer can answer its questions and re-run it, then approves, edits or rejects as before.",
+      audit: "Each run is an agent_run event in the SHA-256 chain: recommendation, checks passed, risk codes and models. Raw evidence is not copied into the log.",
+      checks: "Eight checks, all deterministic code. They bound what the agent can claim. They do not make its recommendation repeatable between runs.",
+    },
+    steps: [
+      { ids: ["evidence", "agent"], text: "After the officer confirms the case and the engine runs, the case goes to the appraisal agent." },
+      { ids: ["agent", "tSof", "tKcc", "tRisk", "tCrop", "tWhat", "tAsk", "tFin"], text: "The agent works through 7 tools. They read the evidence themselves, so the model cannot pass a number in." },
+      { ids: ["agent", "tRisk", "tCrop", "tWhat"], text: "Risk rules catch things like a name that does not match the record or a survey number already financed. What-ifs show the limit with one change." },
+      { ids: ["tFin", "harness", "checks"], text: "The draft report goes to the harness: 8 deterministic checks." },
+      { ids: ["harness", "repair", "agent", "down"], text: "A failed check gets one repair turn. If it still fails, the report becomes review with a template summary." },
+      { ids: ["harness", "trans", "report"], text: "A passing report is translated into the officer's language, but only kept if the numbers match the English." },
+      { ids: ["report", "officer", "agent", "audit"], text: "The officer answers any questions and can re-run. Every run lands in the audit chain." },
+    ],
+  },
+
+  trust: {
+    tab: "Trust guardrails", vb: [1740, 1000],
+    intro: "Who is allowed to do what: AI handles words, the engine handles numbers, the officer handles the decision.",
+    nodes: [
+      N("ai", 40, 120, 300, 120, "AI models", "read · transcribe · translate\ndraft · speak", "violet"),
+      N("eng", 40, 400, 300, 120, "Rules engine", "every rupee,\nevery paragraph", "green"),
+      N("off", 420, 560, 270, 120, "Officer", "the only one who decides", "red"),
+      N("fig", 420, 260, 270, 120, "Figure check", "note + agent harness:\nunknown rupee is never shown", "yellow"),
+      N("log", 420, 800, 270, 110, "Audit chain", "append-only, SHA-256", "green"),
+    ],
+    edges: [
+      E("ai", "r", "fig", "l", { line: true, label: "draft" }),
+      E("eng", "r", "fig", "l", { line: true, label: "result" }),
+      E("fig", "b", "off", "t", { label: "checked note" }),
+      E("eng", "r", "off", "l", { line: true, label: "limit" }),
+      E("off", "b", "log", "t"),
+    ],
+    stickies: [
+      { id: "gNum", x: 760, y: 30, w: 460, h: 300, color: "green", rot: -1, title: "Numbers", lines: ["AI never computes, rounds or overrides a limit", "Every figure shows the RBI paragraph that produced it", "Note and agent figures are verified against tool output", "19 of 19 hand-computed RBI cases pass on device"] },
+      { id: "gPeople", x: 1250, y: 30, w: 460, h: 300, color: "red", rot: 1, title: "People", lines: ["No auto-sanction: the agent only recommends", "Agent cannot approve over a high risk", "Officer approves, edits or rejects", "Edit or reject needs a written reason", "A decided case is locked"] },
+      { id: "gPriv", x: 760, y: 470, w: 460, h: 330, color: "blue", rot: 1, title: "Privacy", lines: ["Aadhaar masked to the last 4 digits", "Photos and audio go to AI for extraction, then are discarded", "API keys only on the server", "Cases stay on the officer's device"] },
+      { id: "gHonest", x: 1250, y: 470, w: 460, h: 330, color: "yellow", rot: -1, title: "Honesty", lines: ["Tamper-evident log: Verify chain finds the first changed record", "Proxy Scale of Finance labelled proxy on every screen", "Open rule interpretations listed in the validation pack", "Every AI call and agent run logged with the models used"] },
+    ],
+    details: {
+      ai: "Sarvam and Claude extract, transcribe, translate, draft and speak. Their prompts forbid computing money, and their output is schema-constrained JSON.",
+      eng: "Deterministic and pure: same inputs, same limit, every time. Covered by unit tests and a 19-case validation set.",
+      off: "A named officer profile is attached to every decision in the audit log.",
+      fig: "Rupee amounts in the note draft (including lakh and Devanagari digits) are parsed and compared with every number in the engine result. The agent report goes through 8 harness checks, and a translation is kept only if its numbers match the English.",
+      log: "Each record carries the previous record's hash, so editing any past record breaks every hash after it.",
+    },
+    steps: [
+      { ids: ["ai", "eng", "off"], text: "Three roles: AI handles words, the engine handles numbers, the officer handles the decision." },
+      { ids: ["ai", "eng", "fig"], text: "The drafted note and the agent report are checked against tool results. A figure the engine did not produce is never shown." },
+      { ids: ["gNum"], text: "Numbers: deterministic, cited and tested." },
+      { ids: ["fig", "off", "gPeople"], text: "People: no automatic sanction. The officer decides, with a reason for any change." },
+      { ids: ["gPriv"], text: "Privacy by minimisation: Aadhaar last 4 only, no stored media, keys on the server, data on the device." },
+      { ids: ["off", "log", "gHonest"], text: "Honesty: a tamper-evident log, proxy data labelled, open interpretations listed." },
+    ],
+  },
+};
+
+const svg = document.getElementById("canvas");
+const NS = "http://www.w3.org/2000/svg";
+const rc = rough.svg(svg);
+let focusId = null, cur = "system", idx = -1, timer = null, groups = {}, edgeGroups = [];
+
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+const seedOf = s => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7) % 100000 + 1;
+const SIDE = { r: [1, 0], l: [-1, 0], t: [0, -1], b: [0, 1] };
+const anchor = (n, s) => ({
+  r: [n.x + n.w, n.y + n.h / 2], l: [n.x, n.y + n.h / 2], t: [n.x + n.w / 2, n.y], b: [n.x + n.w / 2, n.y + n.h],
+})[s];
+
+function text(parent, x, y, str, size, color, anchorX = "middle") {
+  const lines = str.split("\n");
+  const t = el("text", { x, y, "font-size": size, "text-anchor": anchorX, fill: color || "#1e1e1e" }, parent);
+  lines.forEach((ln, i) => { const s = el("tspan", { x, dy: i ? size * 1.15 : 0 }, t); s.textContent = ln; });
+  return t;
+}
+
+function drawNode(n, g, i) {
+  const [fill, stroke] = C[n.color];
+  const o = { fill, stroke, strokeWidth: 2, fillStyle: "hachure", hachureGap: 7, fillWeight: 1.3, roughness: 1.3, bowing: 1.2, seed: seedOf(n.id) };
+  const cx = n.x + n.w / 2, cy = n.y + n.h / 2;
+  // white backing keeps hachure readable over the dot grid
+  el("rect", { x: n.x + 3, y: n.y + 3, width: n.w - 6, height: n.h - 6, rx: 10, fill: "#fff", opacity: n.shape === "rect" ? 1 : 0 }, g);
+  if (n.shape === "ellipse") g.appendChild(rc.ellipse(cx, cy, n.w, n.h, o));
+  else if (n.shape === "diamond") g.appendChild(rc.polygon([[cx, n.y], [n.x + n.w, cy], [cx, n.y + n.h], [n.x, cy]], o));
+  else g.appendChild(rc.rectangle(n.x, n.y, n.w, n.h, o));
+  const ls = n.label.split("\n").length, ss = n.sub ? n.sub.split("\n").length : 0;
+  const LS = 21, SS = 15, total = ls * LS * 1.15 + ss * SS * 1.15 + (ss ? 4 : 0);
+  let y = cy - total / 2 + LS * 0.85;
+  const parts = [text(g, cx, y, n.label, LS)];
+  if (n.sub) parts.push(text(g, cx, y + ls * LS * 1.15 + 2, n.sub, SS, "#555"));
+  const room = n.w * (n.shape === "rect" ? 1 : 0.72) - 18;
+  for (const t of parts) { const w = t.getBBox().width; if (w > room) t.setAttribute("font-size", parseFloat(t.getAttribute("font-size")) * room / w); }
+  const ring = rc.rectangle(n.x - 8, n.y - 8, n.w + 16, n.h + 16, { stroke: "#6965db", strokeWidth: 2.5, roughness: 1.6, seed: seedOf(n.id) + 3 });
+  ring.classList.add("ring"); g.appendChild(ring);
+  g.classList.add("n", "enter"); g.style.animationDelay = i * 45 + "ms";
+}
+
+function drawEdge(e, nodes, g, i) {
+  const a = nodes[e.from], b = nodes[e.to];
+  const p0 = anchor(a, e.fs), p1 = anchor(b, e.ts), d0 = SIDE[e.fs], d1 = SIDE[e.ts];
+  const straight = (p0[0] === p1[0] || p0[1] === p1[1]) && d0[0] === -d1[0] && d0[1] === -d1[1] && !e.via || e.line;
+  const k = Math.min(55, Math.hypot(p1[0] - p0[0], p1[1] - p0[1]) / 3);
+  const pts = straight ? [p0, p1] : [p0, [p0[0] + d0[0] * k, p0[1] + d0[1] * k], ...(e.via || []), [p1[0] + d1[0] * k, p1[1] + d1[1] * k], p1];
+  const o = { stroke: "#1e1e1e", strokeWidth: 1.8, roughness: 1.1, bowing: 1.5, seed: seedOf(e.from + e.to) };
+  if (e.dashed) o.strokeLineDash = [9, 8];
+  g.appendChild(straight ? rc.line(p0[0], p0[1], p1[0], p1[1], o) : rc.curve(pts, o));
+  const q = pts[pts.length - 2], ang = Math.atan2(p1[1] - q[1], p1[0] - q[0]), L = 15, sp = 0.5;
+  for (const s of [-sp, sp]) g.appendChild(rc.line(p1[0], p1[1], p1[0] - L * Math.cos(ang + s), p1[1] - L * Math.sin(ang + s), { ...o, strokeLineDash: undefined }));
+  if (e.label) {
+    const m = e.labelAt || (pts.length === 2 ? [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2] : pts[Math.floor(pts.length / 2)]);
+    const t = text(g, m[0], m[1] + 5, e.label, 17, "#495057");
+    t.setAttribute("paint-order", "stroke"); t.setAttribute("stroke", "#fff"); t.setAttribute("stroke-width", 7); t.setAttribute("stroke-linejoin", "round");
+  }
+  g.classList.add("e", "enter"); g.style.animationDelay = 250 + i * 30 + "ms";
+}
+
+function wrap(str, size, width) {
+  const max = Math.max(8, Math.floor(width / (size * 0.44))), out = [];
+  for (const para of str.split("\n")) {
+    let line = "";
+    for (const w of para.split(" ")) { if (line && (line + " " + w).length > max) { out.push(line); line = w; } else line = line ? line + " " + w : w; }
+    out.push(line);
+  }
+  return out;
+}
+function fit(t, room) { const w = t.getBBox().width; if (w > room) t.setAttribute("font-size", parseFloat(t.getAttribute("font-size")) * room / w); }
+
+function drawSticky(s, g, i) {
+  s.h = Math.max(s.h || 0, 80 + s.lines.reduce((h, it) => h + wrap(it, 18.5, s.w - 46).length * 25 + 6, 0));
+  const [fill, stroke] = C[s.color || "yellow"], inner = el("g", { transform: `rotate(${s.rot || 0} ${s.x + s.w / 2} ${s.y + s.h / 2})` }, g);
+  inner.appendChild(rc.rectangle(s.x, s.y, s.w, s.h, { fill, fillStyle: "solid", stroke, strokeWidth: 1.6, roughness: 1.5, seed: seedOf(s.id) }));
+  fit(text(inner, s.x + 18, s.y + 36, s.title, 24, "#1e1e1e", "start"), s.w - 36);
+  let y = s.y + 72;
+  for (const item of s.lines) {
+    wrap(item, 18.5, s.w - 46).forEach((ln, j) => { fit(text(inner, s.x + (j ? 36 : 18), y, (j ? "" : "• ") + ln, 18.5, "#333", "start"), s.w - 40); y += 25; });
+    y += 6;
+  }
+  const ring = rc.rectangle(s.x - 8, s.y - 8, s.w + 16, s.h + 16, { stroke: "#6965db", strokeWidth: 2.5, roughness: 1.6, seed: seedOf(s.id) + 3 });
+  ring.classList.add("ring"); inner.appendChild(ring);
+  g.classList.add("n", "enter"); g.style.animationDelay = 150 + i * 60 + "ms";
+}
+
+function drawTable(tb, g, i) {
+  const rh = tb.rowH || 40, xs = [tb.x], fillHead = C[tb.color || "violet"][0];
+  tb.colW.forEach(w => xs.push(xs[xs.length - 1] + w));
+  const W = xs[xs.length - 1] - tb.x, H = rh * tb.rows.length, o = { stroke: "#1e1e1e", strokeWidth: 1.3, roughness: 0.9, seed: seedOf(tb.id) };
+  if (tb.title) text(g, tb.x, tb.y - 14, tb.title, 21, "#1e1e1e", "start");
+  g.appendChild(rc.rectangle(tb.x, tb.y, W, rh, { ...o, fill: fillHead, fillStyle: "solid", stroke: "none" }));
+  g.appendChild(rc.rectangle(tb.x, tb.y, W, H, { ...o, strokeWidth: 1.8 }));
+  for (let r = 1; r < tb.rows.length; r++) g.appendChild(rc.line(tb.x, tb.y + r * rh, tb.x + W, tb.y + r * rh, { ...o, strokeWidth: r === 1 ? 1.8 : 0.9, seed: o.seed + r }));
+  for (let c = 1; c < xs.length - 1; c++) g.appendChild(rc.line(xs[c], tb.y, xs[c], tb.y + H, { ...o, strokeWidth: 0.9, seed: o.seed + 50 + c }));
+  tb.rows.forEach((row, r) => row.forEach((v, c) => {
+    const cx = (xs[c] + xs[c + 1]) / 2, cy = tb.y + r * rh + rh / 2, mk = { roughness: 0.8, strokeWidth: 2.6, seed: o.seed + r * 9 + c };
+    if (r && v === "Y") g.appendChild(rc.linearPath([[cx - 9, cy], [cx - 2, cy + 8], [cx + 11, cy - 9]], { ...mk, stroke: "#2f9e44" }));
+    else if (r && v === "N") { g.appendChild(rc.line(cx - 7, cy - 7, cx + 7, cy + 7, { ...mk, stroke: "#e03131", strokeWidth: 2 })); g.appendChild(rc.line(cx + 7, cy - 7, cx - 7, cy + 7, { ...mk, stroke: "#e03131", strokeWidth: 2, seed: mk.seed + 1 })); }
+    else {
+      const left = c === 0, tt = text(g, left ? xs[c] + 12 : cx, cy + 6, v, r ? 17 : 18, r ? "#333" : "#1e1e1e", left ? "start" : "middle");
+      fit(tt, xs[c + 1] - xs[c] - 16);
+    }
+  }));
+  const ring = rc.rectangle(tb.x - 10, tb.y - 10, W + 20, H + 20, { stroke: "#6965db", strokeWidth: 2.5, roughness: 1.6, seed: o.seed + 3 });
+  ring.classList.add("ring"); g.appendChild(ring);
+  g.classList.add("n", "enter"); g.style.animationDelay = 150 + i * 80 + "ms";
+}
+
+function render() {
+  const D = DIAGRAMS[cur];
+  svg.innerHTML = ""; groups = {}; edgeGroups = [];
+  svg.setAttribute("viewBox", `0 0 ${D.vb[0]} ${D.vb[1]}`);
+  const nodes = Object.fromEntries([...D.nodes, ...(D.stickies || [])].map(n => [n.id, n]));
+  (D.frames || []).forEach(f => {
+    svg.appendChild(rc.rectangle(f.x, f.y, f.w, f.h, { stroke: "#868e96", strokeWidth: 1.5, strokeLineDash: [6, 7], roughness: 1.2, seed: 11 }));
+    text(svg, f.x + 12, f.y + 26, f.label, 18, "#868e96", "start");
+  });
+  const eg = el("g", {}, svg);
+  D.edges.forEach((e, i) => { const g = el("g", {}, eg); drawEdge(e, nodes, g, i); edgeGroups.push({ g, e }); });
+  D.nodes.forEach((n, i) => { const g = el("g", { "data-id": n.id }, svg); drawNode(n, g, i); groups[n.id] = g; });
+  (D.stickies || []).forEach((s, i) => { const g = el("g", { "data-id": s.id }, svg); drawSticky(s, g, i); groups[s.id] = g; });
+  (D.tables || []).forEach((tb, i) => { const g = el("g", { "data-id": tb.id }, svg); drawTable(tb, g, i); groups[tb.id] = g; });
+  for (const id in groups) if (D.details?.[id]) { groups[id].style.cursor = "pointer"; groups[id].addEventListener("click", () => { stop(); focusId = id; idx = -1; apply(); }); }
+  (D.notes || []).forEach(nt => { const t = text(svg, nt.x, nt.y, nt.text, 18, "#868e96", "start"); t.classList.add("n"); groups["note:" + nt.x] = t; });
+  apply();
+}
+
+function apply() {
+  const D = DIAGRAMS[cur], step = D.steps[idx];
+  const on = focusId ? new Set([focusId]) : step ? new Set(step.ids) : null;
+  for (const id in groups) {
+    const g = groups[id], active = !on || on.has(id);
+    g.style.opacity = active || id.startsWith("note:") && !on ? 1 : 0.14;
+    g.classList.toggle("on", !!on && on.has(id));
+  }
+  edgeGroups.forEach(({ g, e }) => { g.style.opacity = !on || (on.has(e.from) && on.has(e.to)) ? 1 : 0.1; });
+  document.getElementById("caption").textContent = focusId ? D.details[focusId] : step ? step.text : D.intro;
+  document.getElementById("count").textContent = focusId ? "DETAIL" : step ? `STEP ${idx + 1} / ${D.steps.length}` : `${D.steps.length} STEPS`;
+}
+
+function go(i) { focusId = null; const n = DIAGRAMS[cur].steps.length; idx = Math.max(-1, Math.min(n - 1, i)); apply(); }
+function stop() { clearInterval(timer); timer = null; document.getElementById("play").textContent = "Play"; }
+function play() {
+  if (timer) return stop();
+  if (idx >= DIAGRAMS[cur].steps.length - 1) idx = -1;
+  go(idx + 1);
+  document.getElementById("play").textContent = "Pause";
+  timer = setInterval(() => { if (idx >= DIAGRAMS[cur].steps.length - 1) stop(); else go(idx + 1); }, 4200);
+}
+function switchTo(key) {
+  stop(); cur = key; idx = -1; focusId = null;
+  document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.k === key));
+  render();
+}
+
+const tabs = document.getElementById("tabs");
+for (const k in DIAGRAMS) {
+  const b = document.createElement("button"); b.setAttribute("role", "tab"); b.dataset.k = k; b.textContent = `${Object.keys(DIAGRAMS).indexOf(k) + 1}. ${DIAGRAMS[k].tab}`;
+  b.onclick = () => switchTo(k); tabs.appendChild(b);
+}
+document.getElementById("next").onclick = () => { stop(); go(idx + 1); };
+document.getElementById("prev").onclick = () => { stop(); go(idx - 1); };
+document.getElementById("all").onclick = () => { stop(); go(-1); };
+document.getElementById("play").onclick = play;
+const fs = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.().catch(() => {});
+document.getElementById("fs").onclick = fs;
+document.addEventListener("keydown", ev => {
+  if (ev.key === "ArrowRight") { stop(); go(idx + 1); }
+  else if (ev.key === "ArrowLeft") { stop(); go(idx - 1); }
+  else if (ev.key === "Escape") { stop(); go(-1); }
+  else if (ev.key === " ") { ev.preventDefault(); play(); }
+  else if (ev.key === "f" || ev.key === "F") fs();
+  else if (/^[1-9]$/.test(ev.key) && Object.keys(DIAGRAMS)[+ev.key - 1]) switchTo(Object.keys(DIAGRAMS)[+ev.key - 1]);
+});
+document.fonts.load('21px "Virgil"').finally(() => {
+  const [k, s] = location.hash.slice(1).split(".");
+  switchTo(DIAGRAMS[k] ? k : "system");
+  if (s) go(+s - 1);
+});
+</script>
+</body>
+</html>
