@@ -92,3 +92,18 @@ export function chunkText(text: string, max: number): string[] {
   if (cur) out.push(cur);
   return out;
 }
+
+/** Digits in any Indian script as ASCII, sorted, grouping commas dropped: a translation must keep this set. */
+export function figures(s: string): string {
+  const ascii = s.replace(/\p{Nd}/gu, (d) => {
+    const cp = d.codePointAt(0)!;
+    let k = 0;
+    while (k < 9 && /\p{Nd}/u.test(String.fromCodePoint(cp - k - 1))) k++;
+    return String(k);
+  });
+  return (ascii.match(/\d[\d,]*(\.\d+)?/g) ?? []).map((n) => n.replace(/,/g, "")).sort().join("|");
+}
+
+/** Saaras English unless its numbers differ from the transcript; then the English the crops were mapped from. */
+export const pickEnglish = (saaras: string, mapped: string, transcript: string) =>
+  saaras && figures(saaras) === figures(transcript) ? saaras : mapped || saaras;

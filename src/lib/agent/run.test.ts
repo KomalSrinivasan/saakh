@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { simulateReadableStream } from "ai";
 import { MockLanguageModelV4 } from "ai/test";
 import { computeKcc } from "../kcc.ts";
-import { figures, runAgent, templateSummary, type SaakhWriter } from "./run.ts";
+import { figures } from "../ai-pure.ts";
+import { runAgent, templateSummary, type SaakhWriter } from "./run.ts";
 import { baseInput } from "./tools.ts";
 import { sehore } from "./fixtures.ts";
 

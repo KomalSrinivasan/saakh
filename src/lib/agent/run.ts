@@ -1,6 +1,6 @@
 // Appraisal agent: a ToolLoopAgent plans and calls deterministic tools; harness verifiers gate the report.
 import { hasToolCall, isStepCount, ToolLoopAgent, toUIMessageStream, type LanguageModel, type ModelMessage, type StopCondition, type UIMessageStreamWriter } from "ai";
-import { inr, resultNumbers } from "../ai-pure.ts";
+import { figures, inr, resultNumbers } from "../ai-pure.ts";
 import { verifyReport } from "../harness.ts";
 import { whatIfs } from "../whatif.ts";
 import { baseInput, execTool, makeTools, TOOL_NAMES, type ToolOutput, type ToolSink, type ToolState, type Translate } from "./tools.ts";
@@ -29,16 +29,6 @@ How to work:
 - Keep every risk the rules found. Recommend approve only if the engine has no error flags and there are no high risks. Use decline for clear fraud signals (e.g. double financing on an approved case). Otherwise review.
 - finish.summary: 4 to 7 short sentences, never more, in English (the harness translates it for the officer), plain banker language: the limit and how it was reached, the main risks and what to verify, and your recommendation.`;
 
-/** Digits in any Indian script as ASCII, sorted, grouping commas dropped: a translation must keep this set. */
-export function figures(s: string): string {
-  const ascii = s.replace(/\p{Nd}/gu, (d) => {
-    const cp = d.codePointAt(0)!;
-    let k = 0;
-    while (k < 9 && /\p{Nd}/u.test(String.fromCodePoint(cp - k - 1))) k++;
-    return String(k);
-  });
-  return (ascii.match(/\d[\d,]*(\.\d+)?/g) ?? []).map((n) => n.replace(/,/g, "")).sort().join("|");
-}
 
 /** Officer-language text, or the English original when translation fails or changes a figure. */
 async function localize(text: string, lang: string, translate: Translate, models: string[]): Promise<string> {

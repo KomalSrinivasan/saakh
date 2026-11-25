@@ -9,6 +9,7 @@ import {
   chunkText,
   maskAadhaar,
   overclaimQuestion,
+  pickEnglish,
   seasonOverclaims,
   toHectare,
   unknownFigures,
@@ -357,7 +358,7 @@ followUps: short English questions for the officer when area, season or crop is 
   if (d.crops.some((c) => c.areaUnit === "bigha"))
     questions.push("Some areas were in bigha, converted at 1 bigha = 0.1115 ha. Please confirm the local bigha size.");
   const fu = await inOfficerLang(questions, o.officerLang, by(deadline));
-  return { transcript, english: english || d.english, crops, unmapped: uniq(unmapped), followUps: fu.list, models: uniq([...models, ...fu.models]) };
+  return { transcript, english: pickEnglish(english, d.english, transcript), crops, unmapped: uniq(unmapped), followUps: fu.list, models: uniq([...models, ...fu.models]) };
 }
 
 // ---- note ----

@@ -5,6 +5,7 @@ import {
   aadhaarLast4,
   chunkText,
   maskAadhaar,
+  pickEnglish,
   resultNumbers,
   MP_BIGHA_TO_HA,
   rupeeFigures,
@@ -78,4 +79,11 @@ test("resultNumbers keeps rupee amounts, not survey or para numbers", () => {
   const s = resultNumbers({ kccLimit: 287000, areaHa: 1.5, evidence: ["Survey no: 112/3", "para 13(3)", "Limit ₹2,91,000"] });
   assert.ok(s.has(287000) && s.has(291000));
   assert.ok(!s.has(112) && !s.has(13) && !s.has(2));
+});
+
+test("pickEnglish drops a translation whose numbers drift from the transcript", () => {
+  const said = "मग रब्बीत 1.2 हेक्टरवर गहू आणि उरलेल्या 0.3 हेक्टरवर हरभरा";
+  assert.equal(pickEnglish("Wheat on 1.25 ha and gram on 0.35 ha", "Wheat on 1.2 ha, gram on 0.3 ha", said), "Wheat on 1.2 ha, gram on 0.3 ha");
+  assert.equal(pickEnglish("Wheat on 1.2 hectares and gram on 0.3", "x", said), "Wheat on 1.2 hectares and gram on 0.3");
+  assert.equal(pickEnglish("", "mapped", said), "mapped");
 });
