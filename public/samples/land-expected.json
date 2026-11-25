@@ -1,0 +1,159 @@
+{
+  "note": "Synthetic samples, fictional data. Acre factor 0.404686; bigha factor printed on image.",
+  "bighaToHa": 0.25,
+  "records": [
+    {
+      "file": "/samples/khasra-1.jpg",
+      "style": "clean",
+      "district": "सीहोर",
+      "tehsil": "आष्टा",
+      "ownerName": "रामप्रसाद पटेल",
+      "village": "खजूरिया कलां",
+      "surveyNos": [
+        "214/1"
+      ],
+      "areaAsPrinted": 2,
+      "areaUnitSeen": "hectare",
+      "areaHa": 2,
+      "aadhaarLast4": "4821"
+    },
+    {
+      "file": "/samples/khasra-2.jpg",
+      "style": "rotated+devanagari-digits",
+      "district": "सीहोर",
+      "tehsil": "इछावर",
+      "ownerName": "सुनीता बाई कुशवाहा",
+      "village": "देवपुरा",
+      "surveyNos": [
+        "112/3"
+      ],
+      "areaAsPrinted": 1.5,
+      "areaUnitSeen": "hectare",
+      "areaHa": 1.5,
+      "aadhaarLast4": "7390"
+    },
+    {
+      "file": "/samples/khasra-3.jpg",
+      "style": "phone",
+      "district": "इंदौर",
+      "tehsil": "देपालपुर",
+      "ownerName": "गोविंद सिंह चौहान",
+      "village": "सांवेर खेड़ी",
+      "surveyNos": [
+        "45"
+      ],
+      "areaAsPrinted": 3.25,
+      "areaUnitSeen": "hectare",
+      "areaHa": 3.25,
+      "aadhaarLast4": "1658"
+    },
+    {
+      "file": "/samples/khasra-4.jpg",
+      "style": "clean",
+      "district": "उज्जैन",
+      "tehsil": "तराना",
+      "ownerName": "हरिओम शर्मा",
+      "village": "कनासिया",
+      "surveyNos": [
+        "78/2"
+      ],
+      "areaAsPrinted": 4.5,
+      "areaUnitSeen": "acre",
+      "areaHa": 1.8211,
+      "aadhaarLast4": "2047"
+    },
+    {
+      "file": "/samples/khasra-5.jpg",
+      "style": "rotated",
+      "district": "देवास",
+      "tehsil": "सोनकच्छ",
+      "ownerName": "कमला देवी यादव",
+      "village": "पीपलरावां खुर्द",
+      "surveyNos": [
+        "301"
+      ],
+      "areaAsPrinted": 6,
+      "areaUnitSeen": "bigha",
+      "areaHa": 1.5,
+      "aadhaarLast4": "5512"
+    },
+    {
+      "file": "/samples/khasra-6.jpg",
+      "style": "clean",
+      "district": "धार",
+      "tehsil": "बदनावर",
+      "ownerName": "भेरूलाल पाटीदार",
+      "village": "बिड़वाल",
+      "surveyNos": [
+        "17/1",
+        "17/4",
+        "233"
+      ],
+      "areaAsPrinted": 2.2,
+      "areaUnitSeen": "hectare",
+      "areaHa": 2.2,
+      "aadhaarLast4": "9034"
+    },
+    {
+      "file": "/samples/khasra-7.jpg",
+      "style": "hand",
+      "district": "सीहोर",
+      "tehsil": "बुधनी",
+      "ownerName": "राधेश्याम मीणा",
+      "village": "मरदानपुर",
+      "surveyNos": [
+        "56/2"
+      ],
+      "areaAsPrinted": 0.8,
+      "areaUnitSeen": "hectare",
+      "areaHa": 0.8,
+      "aadhaarLast4": "3176"
+    },
+    {
+      "file": "/samples/khasra-8.jpg",
+      "style": "phone",
+      "district": "उज्जैन",
+      "tehsil": "महिदपुर",
+      "ownerName": "शंकरलाल गुर्जर",
+      "village": "झारड़ा",
+      "surveyNos": [
+        "9/1",
+        "9/3"
+      ],
+      "areaAsPrinted": 1.4,
+      "areaUnitSeen": "hectare",
+      "areaHa": 1.4,
+      "aadhaarLast4": "6603"
+    },
+    {
+      "file": "/samples/khasra-9.jpg",
+      "style": "rotated",
+      "district": "इंदौर",
+      "tehsil": "महू",
+      "ownerName": "अनीता ठाकुर",
+      "village": "गवली पलासिया",
+      "surveyNos": [
+        "402/1"
+      ],
+      "areaAsPrinted": 0.95,
+      "areaUnitSeen": "hectare",
+      "areaHa": 0.95,
+      "aadhaarLast4": "8245"
+    },
+    {
+      "file": "/samples/khasra-10.jpg",
+      "style": "phone+hand",
+      "district": "देवास",
+      "tehsil": "बागली",
+      "ownerName": "जगदीश प्रसाद वर्मा",
+      "village": "उदयनगर",
+      "surveyNos": [
+        "128/5"
+      ],
+      "areaAsPrinted": 2.75,
+      "areaUnitSeen": "hectare",
+      "areaHa": 2.75,
+      "aadhaarLast4": "1129"
+    }
+  ]
+}

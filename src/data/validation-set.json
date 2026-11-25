@@ -1,0 +1,1428 @@
+{
+  "version": "2026-11-25",
+  "rule": "RBI KCC Directions, 2026; SoF values here are fixed test values, not the district dataset",
+  "calc": [
+    {
+      "id": "C01-baseline",
+      "desc": "Owner 2 ha soybean + wheat, insurance 2,600 (spec quickstart)",
+      "input": {
+        "landHa": 2,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 2
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 2
+          }
+        ],
+        "insurancePremium": 2600,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 172000,
+        "yearlyLimits": [
+          172000,
+          189000,
+          208000,
+          228000,
+          251000,
+          276000
+        ],
+        "shortTermYear6": 276000,
+        "termLoan": 0,
+        "kccLimit": 276000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": false,
+        "flags": [
+          "COLLATERAL_ABOVE_LIMIT"
+        ]
+      }
+    },
+    {
+      "id": "C02-term-loan",
+      "desc": "C01 + term loan 1,00,000 (para 19, 10)",
+      "input": {
+        "landHa": 2,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 2
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 2
+          }
+        ],
+        "insurancePremium": 2600,
+        "termLoan": 100000,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 172000,
+        "yearlyLimits": [
+          172000,
+          189000,
+          208000,
+          228000,
+          251000,
+          276000
+        ],
+        "shortTermYear6": 276000,
+        "termLoan": 100000,
+        "kccLimit": 376000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": false,
+        "flags": [
+          "COLLATERAL_ABOVE_LIMIT"
+        ]
+      }
+    },
+    {
+      "id": "C03-tieup",
+      "desc": "C01 with recovery tie-up: collateral-free up to 3,00,000 (para 25)",
+      "input": {
+        "landHa": 2,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 2
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 2
+          }
+        ],
+        "insurancePremium": 2600,
+        "recoveryTieUp": true,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 172000,
+        "yearlyLimits": [
+          172000,
+          189000,
+          208000,
+          228000,
+          251000,
+          276000
+        ],
+        "shortTermYear6": 276000,
+        "termLoan": 0,
+        "kccLimit": 276000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": true,
+        "flags": []
+      }
+    },
+    {
+      "id": "C04-tieup-over",
+      "desc": "Tie-up + term loan 30,000 pushes CMPL past 3,00,000",
+      "input": {
+        "landHa": 2,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 2
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 2
+          }
+        ],
+        "insurancePremium": 2600,
+        "recoveryTieUp": true,
+        "termLoan": 30000,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 172000,
+        "yearlyLimits": [
+          172000,
+          189000,
+          208000,
+          228000,
+          251000,
+          276000
+        ],
+        "shortTermYear6": 276000,
+        "termLoan": 30000,
+        "kccLimit": 306000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": false,
+        "flags": [
+          "COLLATERAL_ABOVE_LIMIT"
+        ]
+      }
+    },
+    {
+      "id": "C05-sehore-plan",
+      "desc": "Sehore crop plan (parity case): soybean 1.5, wheat 1.2, gram 0.3 notional SoF; just under 2,00,000",
+      "input": {
+        "landHa": 1.5,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 1.5
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 1.2
+          },
+          {
+            "crop": "Gram",
+            "season": "rabi",
+            "areaHa": 0.3
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 124000,
+        "yearlyLimits": [
+          124000,
+          136000,
+          150000,
+          165000,
+          181000,
+          199000
+        ],
+        "shortTermYear6": 199000,
+        "termLoan": 0,
+        "kccLimit": 199000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": true,
+        "flags": [
+          "SOF_NOTIONAL_HIKE"
+        ]
+      }
+    },
+    {
+      "id": "C06-near-threshold-over",
+      "desc": "C05 + insurance 1,500: CMPL just over 2,00,000",
+      "input": {
+        "landHa": 1.5,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 1.5
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 1.2
+          },
+          {
+            "crop": "Gram",
+            "season": "rabi",
+            "areaHa": 0.3
+          }
+        ],
+        "insurancePremium": 1500,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 125000,
+        "yearlyLimits": [
+          125000,
+          138000,
+          152000,
+          167000,
+          183000,
+          202000
+        ],
+        "shortTermYear6": 202000,
+        "termLoan": 0,
+        "kccLimit": 202000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": false,
+        "flags": [
+          "SOF_NOTIONAL_HIKE",
+          "COLLATERAL_ABOVE_LIMIT"
+        ]
+      }
+    },
+    {
+      "id": "C07-threshold-rounding",
+      "desc": "Raw CMPL 2,00,025 rounds to 2,00,000 and is treated as collateral-free (open interpretation)",
+      "input": {
+        "landHa": 1.5,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 1.5
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 1.2
+          },
+          {
+            "crop": "Gram",
+            "season": "rabi",
+            "areaHa": 0.3
+          }
+        ],
+        "insurancePremium": 375,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 124000,
+        "yearlyLimits": [
+          124000,
+          137000,
+          150000,
+          165000,
+          182000,
+          200000
+        ],
+        "shortTermYear6": 200000,
+        "termLoan": 0,
+        "kccLimit": 200000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": true,
+        "flags": [
+          "SOF_NOTIONAL_HIKE"
+        ]
+      }
+    },
+    {
+      "id": "C08-sharecropper-small",
+      "desc": "Sharecropper 0.2 ha soybean: affidavit OK, marginal, Flexi KCC (paras 30, 6(5), 13(7))",
+      "input": {
+        "landHa": 0.2,
+        "tenure": "sharecropper",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 0.2
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 8000,
+        "yearlyLimits": [
+          8000,
+          9000,
+          9000,
+          10000,
+          11000,
+          13000
+        ],
+        "shortTermYear6": 13000,
+        "termLoan": 0,
+        "kccLimit": 13000,
+        "marginal": true,
+        "flexiEligible": true,
+        "collateralFree": true,
+        "flags": [
+          "FLEXI_KCC",
+          "TENANCY_PROOF:info"
+        ]
+      }
+    },
+    {
+      "id": "C09-affidavit-rounding",
+      "desc": "Sharecropper 0.80 ha: raw CMPL 50,248 rounds to 50,000, affidavit still accepted (open interpretation)",
+      "input": {
+        "landHa": 0.8,
+        "tenure": "sharecropper",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 0.8
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 31000,
+        "yearlyLimits": [
+          31000,
+          34000,
+          38000,
+          42000,
+          46000,
+          50000
+        ],
+        "shortTermYear6": 50000,
+        "termLoan": 0,
+        "kccLimit": 50000,
+        "marginal": true,
+        "flexiEligible": true,
+        "collateralFree": true,
+        "flags": [
+          "FLEXI_KCC",
+          "TENANCY_PROOF:info"
+        ]
+      }
+    },
+    {
+      "id": "C10-affidavit-over",
+      "desc": "Sharecropper 0.81 ha: CMPL 51,000 needs panchayat certificate (para 30)",
+      "input": {
+        "landHa": 0.81,
+        "tenure": "sharecropper",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 0.81
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 32000,
+        "yearlyLimits": [
+          32000,
+          35000,
+          38000,
+          42000,
+          46000,
+          51000
+        ],
+        "shortTermYear6": 51000,
+        "termLoan": 0,
+        "kccLimit": 51000,
+        "marginal": true,
+        "flexiEligible": true,
+        "collateralFree": true,
+        "flags": [
+          "FLEXI_KCC",
+          "TENANCY_PROOF:warn"
+        ]
+      }
+    },
+    {
+      "id": "C11-oral-lessee",
+      "desc": "Oral lessee 1.5 ha soybean (para 30 warn)",
+      "input": {
+        "landHa": 1.5,
+        "tenure": "oral_lessee",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 1.5
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 59000,
+        "yearlyLimits": [
+          59000,
+          64000,
+          71000,
+          78000,
+          86000,
+          94000
+        ],
+        "shortTermYear6": 94000,
+        "termLoan": 0,
+        "kccLimit": 94000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": true,
+        "flags": [
+          "TENANCY_PROOF:warn"
+        ]
+      }
+    },
+    {
+      "id": "C12-tenant-written",
+      "desc": "Tenant with written lease, 1.2 ha wheat: no tenancy-proof flag",
+      "input": {
+        "landHa": 1.2,
+        "tenure": "tenant",
+        "crops": [
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 1.2
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 55000,
+        "yearlyLimits": [
+          55000,
+          60000,
+          66000,
+          73000,
+          80000,
+          88000
+        ],
+        "shortTermYear6": 88000,
+        "termLoan": 0,
+        "kccLimit": 88000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": true,
+        "flags": []
+      }
+    },
+    {
+      "id": "C13-sugarcane",
+      "desc": "Sugarcane (annual, 12-18 months) 1 ha + soybean 1 ha + wheat 1 ha on 2 ha, insurance 6,000; long-duration crop counted once",
+      "input": {
+        "landHa": 2,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Sugarcane",
+            "season": "annual",
+            "areaHa": 1
+          },
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 1
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 1
+          }
+        ],
+        "insurancePremium": 6000,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 247000,
+        "yearlyLimits": [
+          247000,
+          271000,
+          298000,
+          328000,
+          361000,
+          397000
+        ],
+        "shortTermYear6": 397000,
+        "termLoan": 0,
+        "kccLimit": 397000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": false,
+        "flags": [
+          "COLLATERAL_ABOVE_LIMIT"
+        ]
+      }
+    },
+    {
+      "id": "C14-sugarcane-overlap",
+      "desc": "Sugarcane 1.5 ha annual + soybean 1.5 ha kharif on 2 ha: 3 ha in kharif, flagged AREA_EXCEEDS_LAND",
+      "input": {
+        "landHa": 2,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Sugarcane",
+            "season": "annual",
+            "areaHa": 1.5
+          },
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 1.5
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 293000,
+        "yearlyLimits": [
+          293000,
+          322000,
+          354000,
+          389000,
+          428000,
+          471000
+        ],
+        "shortTermYear6": 471000,
+        "termLoan": 0,
+        "kccLimit": 471000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": false,
+        "flags": [
+          "AREA_EXCEEDS_LAND",
+          "COLLATERAL_ABOVE_LIMIT"
+        ]
+      }
+    },
+    {
+      "id": "C15-insurance-term-nosof",
+      "desc": "C01 + dragon fruit 0.5 ha (no SoF, excluded 13(4)) + term loan 2,50,000",
+      "input": {
+        "landHa": 2,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 2
+          },
+          {
+            "crop": "Wheat",
+            "season": "rabi",
+            "areaHa": 2
+          },
+          {
+            "crop": "Dragon fruit",
+            "season": "annual",
+            "areaHa": 0.5
+          }
+        ],
+        "insurancePremium": 2600,
+        "termLoan": 250000,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 172000,
+        "yearlyLimits": [
+          172000,
+          189000,
+          208000,
+          228000,
+          251000,
+          276000
+        ],
+        "shortTermYear6": 276000,
+        "termLoan": 250000,
+        "kccLimit": 526000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": false,
+        "flags": [
+          "AREA_EXCEEDS_LAND",
+          "AREA_EXCEEDS_LAND",
+          "CROP_NOT_IN_SOF",
+          "COLLATERAL_ABOVE_LIMIT"
+        ]
+      }
+    },
+    {
+      "id": "C16-marginal-1ha",
+      "desc": "Exactly 1.00 ha maize + mustard: marginal (para 6(5) <= 1 ha)",
+      "input": {
+        "landHa": 1,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Maize",
+            "season": "kharif",
+            "areaHa": 1
+          },
+          {
+            "crop": "Mustard",
+            "season": "rabi",
+            "areaHa": 1
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 70000,
+        "yearlyLimits": [
+          70000,
+          77000,
+          85000,
+          93000,
+          103000,
+          113000
+        ],
+        "shortTermYear6": 113000,
+        "termLoan": 0,
+        "kccLimit": 113000,
+        "marginal": true,
+        "flexiEligible": true,
+        "collateralFree": true,
+        "flags": [
+          "FLEXI_KCC"
+        ]
+      }
+    },
+    {
+      "id": "C17-small-1.01ha",
+      "desc": "1.01 ha maize + mustard: not marginal",
+      "input": {
+        "landHa": 1.01,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Maize",
+            "season": "kharif",
+            "areaHa": 1.01
+          },
+          {
+            "crop": "Mustard",
+            "season": "rabi",
+            "areaHa": 1.01
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 71000,
+        "yearlyLimits": [
+          71000,
+          78000,
+          86000,
+          94000,
+          104000,
+          114000
+        ],
+        "shortTermYear6": 114000,
+        "termLoan": 0,
+        "kccLimit": 114000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": true,
+        "flags": []
+      }
+    },
+    {
+      "id": "C18-acre-record",
+      "desc": "Land from khasra-4 (4.5 acre = 1.8211 ha): cotton kharif + gram rabi",
+      "input": {
+        "landHa": 1.8211,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Cotton",
+            "season": "kharif",
+            "areaHa": 1.8211
+          },
+          {
+            "crop": "Gram",
+            "season": "rabi",
+            "areaHa": 1.8211
+          }
+        ],
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 172000,
+        "yearlyLimits": [
+          172000,
+          189000,
+          208000,
+          228000,
+          251000,
+          276000
+        ],
+        "shortTermYear6": 276000,
+        "termLoan": 0,
+        "kccLimit": 276000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": false,
+        "flags": [
+          "SOF_NOTIONAL_HIKE",
+          "COLLATERAL_ABOVE_LIMIT"
+        ]
+      }
+    },
+    {
+      "id": "C19-area-exceeds",
+      "desc": "Soybean 3 ha claimed on 2 ha land: error flag (figures still computed, UI must block)",
+      "input": {
+        "landHa": 2,
+        "tenure": "owner",
+        "crops": [
+          {
+            "crop": "Soybean",
+            "season": "kharif",
+            "areaHa": 3
+          }
+        ],
+        "insurancePremium": 2600,
+        "sof": {
+          "soybean": {
+            "current": 30000
+          },
+          "wheat": {
+            "current": 35000
+          },
+          "gram": {
+            "previous": 25000
+          },
+          "maize": {
+            "current": 28000
+          },
+          "mustard": {
+            "current": 26000
+          },
+          "cotton": {
+            "current": 45000
+          },
+          "sugarcane": {
+            "current": 120000
+          }
+        }
+      },
+      "expected": {
+        "year1Limit": 120000,
+        "yearlyLimits": [
+          120000,
+          132000,
+          145000,
+          159000,
+          175000,
+          193000
+        ],
+        "shortTermYear6": 193000,
+        "termLoan": 0,
+        "kccLimit": 193000,
+        "marginal": false,
+        "flexiEligible": false,
+        "collateralFree": true,
+        "flags": [
+          "AREA_EXCEEDS_LAND"
+        ]
+      }
+    }
+  ],
+  "extraction": {
+    "source": "/samples/land-expected.json",
+    "passRule": "areaHa within 0.01 ha and surveyNos set-equal (SC-003: >= 9 of 10)",
+    "items": [
+      {
+        "file": "/samples/khasra-1.jpg",
+        "ownerName": "रामप्रसाद पटेल",
+        "village": "खजूरिया कलां",
+        "surveyNos": [
+          "214/1"
+        ],
+        "areaHa": 2,
+        "areaUnitSeen": "hectare",
+        "aadhaarLast4": "4821"
+      },
+      {
+        "file": "/samples/khasra-2.jpg",
+        "ownerName": "सुनीता बाई कुशवाहा",
+        "village": "देवपुरा",
+        "surveyNos": [
+          "112/3"
+        ],
+        "areaHa": 1.5,
+        "areaUnitSeen": "hectare",
+        "aadhaarLast4": "7390"
+      },
+      {
+        "file": "/samples/khasra-3.jpg",
+        "ownerName": "गोविंद सिंह चौहान",
+        "village": "सांवेर खेड़ी",
+        "surveyNos": [
+          "45"
+        ],
+        "areaHa": 3.25,
+        "areaUnitSeen": "hectare",
+        "aadhaarLast4": "1658"
+      },
+      {
+        "file": "/samples/khasra-4.jpg",
+        "ownerName": "हरिओम शर्मा",
+        "village": "कनासिया",
+        "surveyNos": [
+          "78/2"
+        ],
+        "areaHa": 1.8211,
+        "areaUnitSeen": "acre",
+        "aadhaarLast4": "2047"
+      },
+      {
+        "file": "/samples/khasra-5.jpg",
+        "ownerName": "कमला देवी यादव",
+        "village": "पीपलरावां खुर्द",
+        "surveyNos": [
+          "301"
+        ],
+        "areaHa": 1.5,
+        "areaUnitSeen": "bigha",
+        "aadhaarLast4": "5512"
+      },
+      {
+        "file": "/samples/khasra-6.jpg",
+        "ownerName": "भेरूलाल पाटीदार",
+        "village": "बिड़वाल",
+        "surveyNos": [
+          "17/1",
+          "17/4",
+          "233"
+        ],
+        "areaHa": 2.2,
+        "areaUnitSeen": "hectare",
+        "aadhaarLast4": "9034"
+      },
+      {
+        "file": "/samples/khasra-7.jpg",
+        "ownerName": "राधेश्याम मीणा",
+        "village": "मरदानपुर",
+        "surveyNos": [
+          "56/2"
+        ],
+        "areaHa": 0.8,
+        "areaUnitSeen": "hectare",
+        "aadhaarLast4": "3176"
+      },
+      {
+        "file": "/samples/khasra-8.jpg",
+        "ownerName": "शंकरलाल गुर्जर",
+        "village": "झारड़ा",
+        "surveyNos": [
+          "9/1",
+          "9/3"
+        ],
+        "areaHa": 1.4,
+        "areaUnitSeen": "hectare",
+        "aadhaarLast4": "6603"
+      },
+      {
+        "file": "/samples/khasra-9.jpg",
+        "ownerName": "अनीता ठाकुर",
+        "village": "गवली पलासिया",
+        "surveyNos": [
+          "402/1"
+        ],
+        "areaHa": 0.95,
+        "areaUnitSeen": "hectare",
+        "aadhaarLast4": "8245"
+      },
+      {
+        "file": "/samples/khasra-10.jpg",
+        "ownerName": "जगदीश प्रसाद वर्मा",
+        "village": "उदयनगर",
+        "surveyNos": [
+          "128/5"
+        ],
+        "areaHa": 2.75,
+        "areaUnitSeen": "hectare",
+        "aadhaarLast4": "1129"
+      }
+    ]
+  },
+  "parity": {
+    "source": "/samples/crop-plans.json",
+    "calcCase": "C05-sehore-plan",
+    "passRule": "every language yields expectedCrops (crop key, season, areaHa within 0.01) and the C05 limit",
+    "expectedCrops": [
+      {
+        "crop": "soybean",
+        "season": "kharif",
+        "areaHa": 1.5
+      },
+      {
+        "crop": "wheat",
+        "season": "rabi",
+        "areaHa": 1.2
+      },
+      {
+        "crop": "gram",
+        "season": "rabi",
+        "areaHa": 0.3
+      }
+    ],
+    "transcripts": [
+      {
+        "lang": "hi-IN",
+        "text": "राम राम साहब। सीहोर में मेरी डेढ़ हेक्टेयर ज़मीन है। इस बार खरीफ में, बारिश वाली फसल, पूरी डेढ़ हेक्टेयर में सोयाबीन बोऊंगा। फिर रबी में एक पॉइंट दो हेक्टेयर में गेहूं लगाऊंगा, और जो पॉइंट तीन हेक्टेयर बचती है उसमें चना डालूंगा।",
+        "audio": "/samples/crop-plan-hi.wav"
+      },
+      {
+        "lang": "en-IN",
+        "text": "Namaste sir. I have one and a half hectare land in Sehore. This kharif I will sow soybean on the full one and a half hectare. Then in rabi, wheat on one point two hectare, and chana, that is gram, on the remaining point three hectare.",
+        "audio": "/samples/crop-plan-en.wav"
+      },
+      {
+        "lang": "mr-IN",
+        "text": "नमस्कार साहेब. सीहोरला माझी दीड हेक्टर जमीन आहे. या खरिपात पूर्ण दीड हेक्टरवर सोयाबीन पेरणार. मग रब्बीत एक पूर्णांक दोन हेक्टरवर गहू, आणि उरलेल्या शून्य पूर्णांक तीन हेक्टरवर हरभरा घेणार.",
+        "audio": "/samples/crop-plan-mr.wav"
+      },
+      {
+        "lang": "gu-IN",
+        "text": "નમસ્તે સાહેબ. સીહોરમાં મારી દોઢ હેક્ટર જમીન છે. આ ખરીફમાં આખા દોઢ હેક્ટરમાં સોયાબીન વાવીશ. પછી રવીમાં એક પોઈન્ટ બે હેક્ટરમાં ઘઉં, અને બાકીના પોઈન્ટ ત્રણ હેક્ટરમાં ચણા વાવીશ.",
+        "audio": "/samples/crop-plan-gu.wav"
+      },
+      {
+        "lang": "te-IN",
+        "text": "నమస్కారం సార్. సీహోర్‌లో నాకు ఒకటిన్నర హెక్టార్ల భూమి ఉంది. ఈ ఖరీఫ్‌లో మొత్తం ఒకటిన్నర హెక్టార్లలో సోయాబీన్ వేస్తాను. తర్వాత రబీలో ఒక పాయింట్ రెండు హెక్టార్లలో గోధుమ, మిగిలిన పాయింట్ మూడు హెక్టార్లలో శనగలు వేస్తాను.",
+        "audio": "/samples/crop-plan-te.wav"
+      },
+      {
+        "lang": "ta-IN",
+        "text": "வணக்கம் சார். சீஹோரில் எனக்கு ஒன்றரை ஹெக்டேர் நிலம் இருக்கிறது. இந்த காரீஃப் பருவத்தில் முழு ஒன்றரை ஹெக்டேரிலும் சோயாபீன் விதைப்பேன். பிறகு ராபி பருவத்தில் ஒன்று புள்ளி இரண்டு ஹெக்டேரில் கோதுமை, மீதமுள்ள பூஜ்யம் புள்ளி மூன்று ஹெக்டேரில் கொண்டைக்கடலை போடுவேன்.",
+        "audio": "/samples/crop-plan-ta.wav"
+      },
+      {
+        "lang": "bn-IN",
+        "text": "নমস্কার স্যার। আমার সেহোরে 1.5 হেক্টর জমি আছে। এই খরিফ মরসুমে আমি সম্পূর্ণ 1.5 হেক্টর জমিতে soybean বীজবপন করব। তারপর রবি মরসুমে, 1.2 হেক্টর জমিতে গম এবং অবশিষ্ট 0.3 হেক্টর জমিতে ছোলা, অর্থাৎ ছোলা চাষ করা হয়।",
+        "source": "machine-translated with mayura:v1 from an English plan with numeral areas"
+      },
+      {
+        "lang": "kn-IN",
+        "text": "ನಮಸ್ಕಾರ ಸರ್. ನನ್ನ ಬಳಿ ಸೆಹೋರ್‌ನಲ್ಲಿ 1.5 ಹೆಕ್ಟೇರ್ ಭೂಮಿ ಇದೆ. ಈ ಖಾರಿಫ್ ಋತುವಿನಲ್ಲಿ ನಾನು ಸಂಪೂರ್ಣ 1.5 ಹೆಕ್ಟೇರ್ ಪ್ರದೇಶದಲ್ಲಿ ಸೋಯಾಬೀನ್ ಬಿತ್ತನೆ ಮಾಡುತ್ತೇನೆ. ನಂತರ, ರಬಿ ಋತುವಿನಲ್ಲಿ, 1.2 ಹೆಕ್ಟೇರ್ ಗೋಧಿ ಮತ್ತು ಉಳಿದ 0.3 ಹೆಕ್ಟೇರ್‌ನಲ್ಲಿ ಕಡಲೆ ಬೆಳೆಯಲಾಗುತ್ತದೆ.",
+        "source": "machine-translated with mayura:v1 from an English plan with numeral areas"
+      },
+      {
+        "lang": "ml-IN",
+        "text": "നമസ്കാരം സർ. സെഹോറിലുള്ള 1.5 ഹെക്ടർ ഭൂമി എന്റേതാണ്. ഈ ഖാരിഫ് സീസണിൽ ഞാൻ 1.5 ഹെക്ടർ സ്ഥലത്ത് സോയാബീൻ നടും. പിന്നെ, റാബിക്കുവേണ്ടി 1.2 ഹെക്ടറും ബാക്കി 0.3 ഹെക്ടറും വെച്ച് ഗോതമ്പും ചാണയും നട്ടു.",
+        "source": "machine-translated with mayura:v1 from an English plan with numeral areas"
+      },
+      {
+        "lang": "od-IN",
+        "text": "ନମସ୍କାର ମହାଶୟ। ମୋର ସେହୋରଠାରେ 1.5 ହେକ୍ଟର ଜମି ଅଛି। ଏହି ଖରିଫ ଋତୁରେ ମୁଁ ସମ୍ପୂର୍ଣ୍ଣ 1.5 ହେକ୍ଟର ଜମିରେ ସୋୟାବିନ ଚାଷ କରିବି। ତା'ପରେ ରବିରେ, 1.2 ହେକ୍ଟର ଜମିରେ ଗହମ ଏବଂ ଅବଶିଷ୍ଟ 0.3 ହେକ୍ଟର ଜମିରେ ଚଣା, ଅର୍ଥାତ୍‌ ଚଣା ଚାଷ କରାଯାଏ।",
+        "source": "machine-translated with mayura:v1 from an English plan with numeral areas"
+      },
+      {
+        "lang": "pa-IN",
+        "text": "ਨਮਸਤੇ ਜੀ। ਮੇਰੇ ਕੋਲ ਸੇਹore ਵਿੱਚ 1.5 ਹੈਕਟੇਅਰ ਜ਼ਮੀਨ ਹੈ। ਇਸ ਖਾਰੀਫ ਵਿੱਚ ਮੈਂ ਪੂਰੀ 1.5 ਹੈਕਟੇਅਰ ਜ਼ਮੀਨ 'ਤੇ ਸੋਇਆਬੀਨ ਲਗਾਵਾਂਗਾ। ਫਿਰ ਰਬੀ ਵਿੱਚ, 1.2 ਹੈਕਟੇਅਰ ਉੱਤੇ ਕਣਕ ਅਤੇ ਬਾਕੀ 0.3 ਹੈਕਟੇਅਰ ਉੱਤੇ ਛੋਲਿਆਂ, ਜੋ ਕਿ ਚਨਾ ਹੈ, ਦੀ ਕਾਸ਼ਤ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।",
+        "source": "machine-translated with mayura:v1 from an English plan with numeral areas"
+      },
+      {
+        "lang": "ur-IN",
+        "text": "نمستے سر۔ میرے پاس سیہور میں 1.5 ہیکٹر زمین ہے۔ اس خریف میں میں پورے 1.5 ہیکٹر پر سویابین بوؤں گی۔ پھر ربیع میں، 1.2 ہیکٹر پر گندم، اور باقی 0.3 ہیکٹر پر چنا، یعنی دال بوؤں گی۔",
+        "source": "machine-translated with sarvam-translate:v1 from an English plan with numeral areas"
+      },
+      {
+        "lang": "as-IN",
+        "text": "নমস্কাৰ ছাৰ। মোৰ ছেহোৰত 1.5 হেক্টৰ মাটি আছে। এই খাৰীফত মই সম্পূৰ্ণ 1.5 হেক্টৰত চয়াবিন ৰোপণ কৰিম। তাৰ পিছত ৰবিত 1.2 হেক্টৰত ঘেঁহু, আৰু বাকী 0.3 হেক্টৰত চানা, অৰ্থাৎ বুট ৰোপণ কৰিম।",
+        "source": "machine-translated with sarvam-translate:v1 from an English plan with numeral areas"
+      }
+    ]
+  },
+  "openInterpretations": [
+    "Annex I rounding order: unrounded compounding, rounded per year (C01, C02).",
+    "Collateral-free and affidavit thresholds compared after rounding to nearest 1,000 (C07, C09).",
+    "Para 30 affidavit cap compared against full CMPL incl. term loan, not year-1 limit."
+  ]
+}

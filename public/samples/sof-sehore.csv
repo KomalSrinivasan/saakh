@@ -1,0 +1,8 @@
+district,crop,season,current,previous,ref
+Sehore,soybean,kharif,48000,45000,SAMPLE values for demo only - not an official Sehore DLTC Scale of Finance
+Sehore,maize,kharif,40000,37000,SAMPLE values for demo only - not an official Sehore DLTC Scale of Finance
+Sehore,cotton,kharif,70000,65000,SAMPLE values for demo only - not an official Sehore DLTC Scale of Finance
+Sehore,wheat,rabi,52000,48000,SAMPLE values for demo only - not an official Sehore DLTC Scale of Finance
+Sehore,gram,rabi,,42000,SAMPLE values for demo only (current left blank to show para 13(3) previous +10%)
+Sehore,mustard,rabi,40000,37000,SAMPLE values for demo only - not an official Sehore DLTC Scale of Finance
+Sehore,sugarcane,annual,150000,140000,SAMPLE values for demo only - not an official Sehore DLTC Scale of Finance

@@ -1,0 +1,42 @@
+{
+  "note": "Synthetic farmer crop plan (Sehore), same content in 6 languages for language-parity checks. Fictional speaker.",
+  "district": "Sehore",
+  "landHa": 1.5,
+  "expectedCrops": [
+    { "crop": "soybean", "season": "kharif", "areaHa": 1.5 },
+    { "crop": "wheat", "season": "rabi", "areaHa": 1.2 },
+    { "crop": "gram", "season": "rabi", "areaHa": 0.3 }
+  ],
+  "plans": [
+    {
+      "lang": "hi-IN",
+      "audio": "/samples/crop-plan-hi.wav",
+      "text": "राम राम साहब। सीहोर में मेरी डेढ़ हेक्टेयर ज़मीन है। इस बार खरीफ में, बारिश वाली फसल, पूरी डेढ़ हेक्टेयर में सोयाबीन बोऊंगा। फिर रबी में एक पॉइंट दो हेक्टेयर में गेहूं लगाऊंगा, और जो पॉइंट तीन हेक्टेयर बचती है उसमें चना डालूंगा।"
+    },
+    {
+      "lang": "en-IN",
+      "audio": "/samples/crop-plan-en.wav",
+      "text": "Namaste sir. I have one and a half hectare land in Sehore. This kharif I will sow soybean on the full one and a half hectare. Then in rabi, wheat on one point two hectare, and chana, that is gram, on the remaining point three hectare."
+    },
+    {
+      "lang": "mr-IN",
+      "audio": "/samples/crop-plan-mr.wav",
+      "text": "नमस्कार साहेब. सीहोरला माझी दीड हेक्टर जमीन आहे. या खरिपात पूर्ण दीड हेक्टरवर सोयाबीन पेरणार. मग रब्बीत एक पूर्णांक दोन हेक्टरवर गहू, आणि उरलेल्या शून्य पूर्णांक तीन हेक्टरवर हरभरा घेणार."
+    },
+    {
+      "lang": "gu-IN",
+      "audio": "/samples/crop-plan-gu.wav",
+      "text": "નમસ્તે સાહેબ. સીહોરમાં મારી દોઢ હેક્ટર જમીન છે. આ ખરીફમાં આખા દોઢ હેક્ટરમાં સોયાબીન વાવીશ. પછી રવીમાં એક પોઈન્ટ બે હેક્ટરમાં ઘઉં, અને બાકીના પોઈન્ટ ત્રણ હેક્ટરમાં ચણા વાવીશ."
+    },
+    {
+      "lang": "te-IN",
+      "audio": "/samples/crop-plan-te.wav",
+      "text": "నమస్కారం సార్. సీహోర్‌లో నాకు ఒకటిన్నర హెక్టార్ల భూమి ఉంది. ఈ ఖరీఫ్‌లో మొత్తం ఒకటిన్నర హెక్టార్లలో సోయాబీన్ వేస్తాను. తర్వాత రబీలో ఒక పాయింట్ రెండు హెక్టార్లలో గోధుమ, మిగిలిన పాయింట్ మూడు హెక్టార్లలో శనగలు వేస్తాను."
+    },
+    {
+      "lang": "ta-IN",
+      "audio": "/samples/crop-plan-ta.wav",
+      "text": "வணக்கம் சார். சீஹோரில் எனக்கு ஒன்றரை ஹெக்டேர் நிலம் இருக்கிறது. இந்த காரீஃப் பருவத்தில் முழு ஒன்றரை ஹெக்டேரிலும் சோயாபீன் விதைப்பேன். பிறகு ராபி பருவத்தில் ஒன்று புள்ளி இரண்டு ஹெக்டேரில் கோதுமை, மீதமுள்ள பூஜ்யம் புள்ளி மூன்று ஹெக்டேரில் கொண்டைக்கடலை போடுவேன்."
+    }
+  ]
+}
