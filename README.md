@@ -110,11 +110,11 @@ Sample inputs are in `public/samples/`: `khasra-1.jpg` to `khasra-10.jpg`, `crop
 | Calculation, 19 hand-computed RBI cases | 19 / 19 pass, on device |
 | Land-record extraction, 10 synthetic records | 10 / 10 pass on the live deployment |
 | Language parity, one crop plan in 13 languages | 13 / 13 pass on the live deployment |
-| Real Android phone (Samsung, Chrome) | Profile, demo case, compute, agent, Hindi sanction note and decision work end to end |
+| Real Android phone (Samsung, Chrome) | Demo and real mode, compute, agent on the suspicious case (8/8 checks), Hindi sanction note, decision and install as an app work end to end |
 
 Parity covers Hindi, English, Marathi, Gujarati, Telugu, Tamil, Bengali, Kannada, Malayalam, Odia, Punjabi, Urdu and Assamese. The last seven transcripts were machine-translated with Sarvam from an English plan that writes areas as numerals. They are not from native speakers.
 
-On the phone, I have not yet tested the camera, the microphone or install-to-home-screen.
+On the phone, install works: Android builds a real app from it and it opens full screen. I have not yet tested the camera and microphone on the device.
 
 ## Project structure
 
