@@ -32,6 +32,12 @@ export function UiProvider({ children }: { children: ReactNode }) {
     try {
       p = getProfile();
       m = getMode();
+      // ?judge skips sign-in straight into demo mode for evaluators
+      if (new URLSearchParams(location.search).has("judge")) {
+        p = p ?? saveProfile({ name: "Judge", institution: "BUILD 2036", uiLang: "en-IN" });
+        saveMode("demo");
+        m = "demo";
+      }
     } catch {}
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage
     setProfileState(p);
