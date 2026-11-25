@@ -1,16 +1,38 @@
 # Saakh (साख)
 
-Saakh means credit, or trust, in Hindi. It is an installable web app that helps a cooperative bank, RRB or PACS officer appraise a Kisan Credit Card loan under the RBI KCC Directions, 2026 (issued 19 Jun 2026, applying to loans sanctioned from 1 Jan 2027).
+**KCC loan appraisal for cooperative bank officers, on a phone, under the RBI KCC Directions, 2026.**
 
-The officer photographs the farmer's land record and records the crop plan in the farmer's own language. AI reads both and turns them into fields the officer confirms. A deterministic rules engine on the phone then computes every rupee and tags each step with the RBI paragraph behind it. An appraisal agent checks the case for risks, tries what-if changes and writes a recommendation, and a harness of deterministic checks verifies that report before the officer sees it.
+[Live app](https://saakh.komalvardhan.com) · [Demo video](docs/media/saakh-demo.mp4) · [Architecture](docs/architecture.html) · [Impact case](docs/impact-case.md) · Built for BUILD 2036 (TiE Global Summit 2026 x Hack2skill)
 
-The officer gets a sanction note in their language, plays a spoken summary to the farmer in theirs, and approves, edits or rejects. Every step goes into a hash-chained audit log that anyone can verify.
+[![Watch the Saakh demo (1:41)](docs/media/saakh-demo.jpg)](docs/media/saakh-demo.mp4)
 
-Live demo: https://saakh.komalvardhan.com (the older https://saakh.loop-dev.workers.dev still works)
+<sub>Click the image to play the 1:41 demo, recorded on a Samsung Android phone against the live site. There is also a 24-second [teaser](docs/media/saakh-teaser.mp4).</sub>
 
-Built for BUILD 2036 (TiE Global Summit 2026 x Hack2skill).
+Saakh means credit, or trust, in Hindi. Today a cooperative bank, RRB or PACS officer appraising a Kisan Credit Card loan copies the land record by hand, looks up the Scale of Finance, works out six years of limits and writes the sanction note. The RBI KCC Directions, 2026 (issued 19 Jun 2026, for loans sanctioned from 1 Jan 2027) apply to all of these lenders, so each of them has to recompute limits the new way.
+
+With Saakh, the officer photographs the land record and the farmer describes the crop plan in their own language. AI reads both and fills in fields the officer confirms. A deterministic rules engine on the phone computes every rupee and tags each step with its RBI paragraph. An appraisal agent checks the case for risks such as double financing, tries what-if changes and writes a recommendation. A set of deterministic checks verifies that report before the officer sees it. The officer gets a sanction note, plays a spoken summary to the farmer in the farmer's language, and decides. Every step goes into a hash-chained audit log.
+
+The rule behind all of it: **AI handles words. The engine handles numbers. The officer decides.**
+
+## Try it in two minutes
+
+1. Open https://saakh.komalvardhan.com on a phone or desktop. On Android, tap **Install app** to add it to the home screen.
+2. Enter any officer name and choose **Demo mode**. Three fictional farmers load, with sample land records and voice clips.
+3. Follow **How Saakh works** on the home screen. Step 4 opens Mahesh Yadav's case. Tap **Confirm and compute limit**, then **Run appraisal**. In about 12 seconds the agent flags a name mismatch and a survey number that already backs an approved loan, and recommends Review.
+4. Draft the sanction note, play the farmer summary, then approve, edit or reject. Open **Audit record** and tap **Verify chain**.
+5. Open **Validate** to run the 19 RBI calculation cases on your own device.
+
+**Real mode** starts empty. Photograph your own land record and speak the crop plan into the phone.
 
 ## Screenshots
+
+On a Samsung phone, against the live site:
+
+| Land record, two readers agree | Crop plan spoken in Marathi | Agent recommends Review | Audit chain verified |
+|---|---|---|---|
+| ![Land record](docs/screenshots/09-phone-land-read.png) | ![Marathi crop plan](docs/screenshots/10-phone-marathi-crops.png) | ![Agent review](docs/screenshots/11-phone-agent-review.png) | ![Audit chain](docs/screenshots/12-phone-audit-chain.png) |
+
+On desktop:
 
 | Home and guided demo | Limit with RBI paragraphs | Officer decision | Audit chain verified | Validation pack |
 |---|---|---|---|---|
@@ -50,6 +72,19 @@ Built for BUILD 2036 (TiE Global Summit 2026 x Hack2skill).
 
 Right-to-left scripts (Urdu, Kashmiri, Sindhi) render per paragraph, so mixed Urdu and English text reads in the right direction.
 
+## Built with
+
+| Layer | What |
+|---|---|
+| App | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, installable PWA with a service worker |
+| Rules engine | Plain TypeScript in `src/lib/kcc.ts`. Runs on the device with no network or model calls. |
+| Agent | Vercel AI SDK v7 `ToolLoopAgent` with Claude Sonnet 5.5, 7 deterministic tools, streamed trace |
+| Reading and drafting | Claude Sonnet 5.5 and Haiku 5.5 (land-record structuring, crop mapping, sanction note) |
+| Indian languages | Sarvam: Saaras v4 speech-to-text, Vision OCR, Mayura and Sarvam-Translate, Bulbul v3 text-to-speech |
+| Storage | Browser local storage for cases and the SHA-256 audit chain. No server database. |
+| Hosting | Cloudflare Workers through OpenNext, at https://saakh.komalvardhan.com |
+| Tests | `node:test` with 94 unit tests, plus the in-app validation pack |
+
 ## Architecture
 
 ![System architecture](docs/architecture-system.png)
@@ -72,7 +107,7 @@ API keys live only on the server. Cases and the audit log live in the browser's 
 
 ### Example: a constructed fraud case
 
-I built a case where the applicant's name differs from the owner on the land record and the survey number already backs an approved case on the device. The agent returns Review with two high risks, `NAME_MISMATCH` and `DOUBLE_FINANCING`, and the harness passes 8 of 8 checks. A run takes about 13 to 18 seconds on the live deployment.
+I built a case where the applicant's name differs from the owner on the land record and the survey number already backs an approved case on the device. The agent returns Review with two high risks, `NAME_MISMATCH` and `DOUBLE_FINANCING`, and the harness passes 8 of 8 checks. A run takes about 12 seconds on the live deployment.
 
 ## Quick start
 
@@ -95,18 +130,18 @@ Run it:
 
 ```bash
 pnpm dev     # http://localhost:3000
-pnpm test    # 93 unit tests: engine, SoF, audit, storage, validation, AI helpers, risk, harness, agent loop
+pnpm test    # 94 unit tests: engine, SoF, audit, storage, validation, AI helpers, risk, harness, agent loop
 ```
 
 Without keys the app still runs. The engine, risk rules, what-ifs, audit log, Scale of Finance page and calculation part of the validation pack work offline, and every AI step offers manual entry. The agent needs the Anthropic key.
 
-Sample inputs are in `public/samples/`: `khasra-1.jpg` to `khasra-10.jpg`, `crop-plan-<hi|en|mr|gu|te|ta>.wav`, `crop-plans.json` and `sof-sehore.csv`. The full test walkthrough is in [specs/001-kcc-appraisal-agent/quickstart.md](specs/001-kcc-appraisal-agent/quickstart.md).
+In the app, Demo mode loads these samples for you. Sample inputs are in `public/samples/`: `khasra-1.jpg` to `khasra-10.jpg`, `crop-plan-<hi|en|mr|gu|te|ta>.wav`, `crop-plans.json` and `sof-sehore.csv`. The full test walkthrough is in [specs/001-kcc-appraisal-agent/quickstart.md](specs/001-kcc-appraisal-agent/quickstart.md).
 
 ## Testing status
 
 | Check | Result |
 |---|---|
-| Unit tests (`pnpm test`) | 93 / 93 pass |
+| Unit tests (`pnpm test`) | 94 / 94 pass |
 | Calculation, 19 hand-computed RBI cases | 19 / 19 pass, on device |
 | Land-record extraction, 10 synthetic records | 10 / 10 pass on the live deployment |
 | Language parity, one crop plan in 13 languages | 13 / 13 pass on the live deployment |
@@ -121,13 +156,16 @@ On the phone, install works: Android builds a real app from it and it opens full
 ```text
 src/
   app/
-    page.tsx                 case list, new case, guided demo
+    page.tsx                 case list, new case, demo walkthrough
     case/[id]/page.tsx       land -> crops -> confirm -> limit + agent -> note -> decision
     sof/page.tsx             Scale of Finance table and CSV upload
     validate/page.tsx        validation pack
     api/ai/[action]/route.ts land | crops | note | tts | translate (server, holds keys)
     api/agent/route.ts       appraisal agent, streams its trace
-  components/case/           capture, result, agent, risk, what-if, note/decision and audit panels
+  components/
+    case/                    capture, result, agent, risk, what-if, note/decision and audit panels
+    how-it-works.tsx         six-step demo walkthrough
+    install.tsx              install-app button and iPhone hint
   lib/
     kcc.ts                   RBI rules engine
     risk.ts                  17 deterministic risk rules
@@ -138,6 +176,8 @@ src/
     agent/                   tool loop, tools, model, client
     audit.ts                 hash-chained audit log
     ai.ts, ai-pure.ts        Sarvam + Claude calls, figure check, Aadhaar masking
+    note-stream.ts           streamed sanction note with figure verification
+    demo.ts                  demo-mode sample farmers
     sof.ts                   Scale of Finance table, CSV parsing
     store.ts, i18n.ts        on-device storage, UI languages
     validation.ts            validation pack runner
@@ -150,7 +190,7 @@ public/
   sw.js                      app-shell service worker
   samples/                   synthetic land records, crop-plan audio, sample SoF CSV
 specs/001-kcc-appraisal-agent/  spec, plan, research, data model, API contract, tasks
-docs/                        architecture diagram, impact case, screenshots
+docs/                        architecture diagram, impact case, screenshots, demo video
 ```
 
 ## RBI paragraphs implemented
@@ -181,7 +221,7 @@ Three readings of the text are not settled yet and are listed in the validation 
 
 ## Data honesty
 
-The Scale of Finance values bundled for Indore, Sehore, Ujjain, Dewas and Dhar are not official. Official MP 2026-27 tables were not available in machine-readable form, so I used PMFBY sum insured per hectare as a proxy. 28 of the 35 rows are state-level estimates because no district figure was found. Every row carries its source and the app labels it "proxy" on every screen. A bank should upload its official table before relying on any figure. `public/samples/sof-sehore.csv` is sample data for testing the upload, not a real DLTC table.
+The Scale of Finance values bundled for Indore, Sehore, Ujjain, Dewas and Dhar are not official. Official MP 2026-27 tables were not available in machine-readable form, so I used PMFBY sum insured per hectare as a proxy. 28 of the 35 rows are state-level estimates because no district figure was found. Every row carries its source and the app labels it "Estimate" on every screen. A bank should upload its official table before relying on any figure. `public/samples/sof-sehore.csv` is sample data for testing the upload, not a real DLTC table.
 
 The crop calendar and district belts behind the plausibility rules are indicative. Only cotton, garlic, summer moong and soybean were checked against district sources. A plausibility flag asks the officer to look again. It never changes a limit.
 

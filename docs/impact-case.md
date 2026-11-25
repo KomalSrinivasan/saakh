@@ -73,7 +73,7 @@ The validation pack runs at `/validate` in the app, and anyone can rerun it.
 | Calculation accuracy | 19 hand-computed cases covering every implemented paragraph, thresholds, rounding edges, tenants, sugarcane, acre records and over-claimed area | **19 / 19 pass**, on device, no network |
 | Land-record extraction | 10 synthetic land records (`public/samples/khasra-1..10.jpg`). Pass: area within 2%, owner name close match, survey numbers and Aadhaar last 4 exact. Target 9 of 10 | **10 / 10 pass** on the live deployment, 26 Nov 2026 |
 | Language parity | One crop plan in Hindi, English, Marathi, Gujarati, Telugu, Tamil, Bengali, Kannada, Malayalam, Odia, Punjabi, Urdu and Assamese. Pass: same crops and seasons, each area within 0.05 ha. Run on the written transcripts; the spoken Marathi recording was checked separately through speech-to-text. The last seven transcripts were machine-translated with Sarvam from an English plan that writes areas as numerals | **13 / 13 pass** on the live deployment, 26 Nov 2026 |
-| Unit tests | `pnpm test` over engine, SoF parsing, audit chain, storage, validation runner, AI helpers, name matching, read reconciliation, risk rules, what-ifs, harness and the agent loop | **93 / 93 pass** |
+| Unit tests | `pnpm test` over engine, SoF parsing, audit chain, storage, validation runner, AI helpers, name matching, read reconciliation, risk rules, what-ifs, harness and the agent loop | **94 / 94 pass** |
 | Real device | Samsung Android phone, Chrome: profile, demo case, compute, agent, Hindi sanction note and decision, end to end | Works. Camera, microphone and install-to-home-screen not yet tested on the device |
 
 The audit tests also confirm that verification fails when an event is altered, removed, reordered, or altered and then rehashed.
@@ -94,7 +94,7 @@ By 2036 I want every KCC sanction in India to come with a machine-checkable trai
 
 ## Honest limitations
 
-- **Proxy Scale of Finance.** The bundled MP values are PMFBY sum-insured proxies, not official DLTC tables, and 28 of 35 rows are state-level estimates. The app labels them proxy everywhere. Real use requires the bank's official table.
+- **Proxy Scale of Finance.** The bundled MP values are PMFBY sum-insured proxies, not official DLTC tables, and 28 of 35 rows are state-level estimates. The app labels them "Estimate" on every screen. Real use requires the bank's official table.
 - **Prototype.** It has been tested only on synthetic data, with no bank pilot yet. On a real Android phone I have tested the flow end to end, but not the camera, the microphone or install-to-home-screen.
 - **Indicative risk rules.** The risk rules and the agronomy belts behind the crop plausibility checks are indicative. Only cotton, garlic, summer moong and soybean belts were checked against district sources. A flag asks the officer to look again and never changes a limit.
 - **Agent recommendation varies.** The same case can come back approve on one run and review on the next. The harness bounds this, since it blocks approve over a high risk or engine error and keeps every rule finding, but it does not make the recommendation repeatable. The limit itself comes from the engine and does not vary.
