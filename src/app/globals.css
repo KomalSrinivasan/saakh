@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --saakh-primary: #0e4d3a;
+  --saakh-primary-hover: #0b3f30;
+  --saakh-primary-soft: #e8f2ed;
+  --saakh-accent: #b7791f;
+  --saakh-accent-soft: #fbf4e6;
+  --saakh-bg: #f6f7f9;
+  --saakh-on-primary: #ffffff;
+  --saakh-surface: #ffffff;
+  --saakh-subtle: #f9fafb;
+  --saakh-ink: #0b1220;
+  --saakh-ink-2: #344054;
+  --saakh-muted: #5b6475;
+  --saakh-line: #e4e7ec;
+  --saakh-line-strong: #d0d5dd;
+  --saakh-danger: #b42318;
+  --saakh-danger-soft: #fef3f2;
+  --saakh-warn: #b54708;
+  --saakh-warn-soft: #fffaeb;
+  --saakh-success: #067647;
+  --saakh-success-soft: #ecfdf3;
+  --saakh-info: #175cd3;
+  --saakh-info-soft: #eff8ff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--saakh-primary);
+  --color-primary-hover: var(--saakh-primary-hover);
+  --color-primary-soft: var(--saakh-primary-soft);
+  --color-accent: var(--saakh-accent);
+  --color-accent-soft: var(--saakh-accent-soft);
+  --color-bg: var(--saakh-bg);
+  --color-on-primary: var(--saakh-on-primary);
+  --color-surface: var(--saakh-surface);
+  --color-subtle: var(--saakh-subtle);
+  --color-ink: var(--saakh-ink);
+  --color-ink-2: var(--saakh-ink-2);
+  --color-muted: var(--saakh-muted);
+  --color-line: var(--saakh-line);
+  --color-line-strong: var(--saakh-line-strong);
+  --color-danger: var(--saakh-danger);
+  --color-danger-soft: var(--saakh-danger-soft);
+  --color-warn: var(--saakh-warn);
+  --color-warn-soft: var(--saakh-warn-soft);
+  --color-success: var(--saakh-success);
+  --color-success-soft: var(--saakh-success-soft);
+  --color-info: var(--saakh-info);
+  --color-info-soft: var(--saakh-info-soft);
+  --font-sans: var(--font-plex), var(--font-plex-deva), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.05);
+  --shadow-pop: 0 12px 24px -6px rgb(16 24 40 / 0.12), 0 4px 8px -4px rgb(16 24 40 / 0.06);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-size: 15px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--saakh-bg);
+  color: var(--saakh-ink);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+  font-feature-settings: "ss01";
+}
+
+:focus-visible {
+  outline: 2px solid var(--saakh-primary);
+  outline-offset: 2px;
+}
+
+/* Urdu, Kashmiri and Sindhi text runs right to left per paragraph. */
+p, li, textarea, blockquote {
+  unicode-bidi: plaintext;
+}
+
+::selection {
+  background: var(--saakh-primary-soft);
+}
+
+/* Figures line up in tables and stats. */
+@utility num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+@utility card {
+  @apply rounded-xl border border-line bg-surface shadow-card;
+}
+
+@utility field {
+  @apply h-10 w-full rounded-lg border border-line-strong bg-surface px-3 text-[15px] text-ink shadow-card transition-colors placeholder:text-muted/70 hover:border-muted/50 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 disabled:bg-subtle disabled:text-muted;
+}
+
+@utility label {
+  @apply mb-1.5 block text-[13px] font-medium text-ink-2;
+}
+
+@utility btn {
+  @apply inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg px-4 text-[14px] font-semibold whitespace-nowrap transition-[background-color,border-color,color,box-shadow] duration-150 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+@utility btn-primary {
+  @apply btn bg-primary text-on-primary shadow-card hover:bg-primary-hover;
+}
+
+@utility btn-accent {
+  @apply btn bg-ink text-white shadow-card hover:bg-ink-2;
+}
+
+@utility btn-ghost {
+  @apply btn border border-line-strong bg-surface text-ink-2 shadow-card hover:bg-subtle hover:text-ink;
+}
+
+@utility btn-danger {
+  @apply btn border border-danger/30 bg-surface text-danger shadow-card hover:bg-danger-soft;
+}
+
+@utility btn-lg {
+  @apply h-12 px-5 text-[15px];
+}
+
+@utility eyebrow {
+  @apply text-[11px] font-semibold tracking-[0.08em] text-muted uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
