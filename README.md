@@ -110,11 +110,11 @@ Sample inputs are in `public/samples/`: `khasra-1.jpg` to `khasra-10.jpg`, `crop
 | Calculation, 19 hand-computed RBI cases | 19 / 19 pass, on device |
 | Land-record extraction, 10 synthetic records | 10 / 10 pass on the live deployment |
 | Language parity, one crop plan in 13 languages | 13 / 13 pass on the live deployment |
-| Real Android phone (Samsung, Chrome) | Demo and real mode, compute, agent on the suspicious case (8/8 checks), Hindi sanction note, decision and install as an app work end to end |
+| Real Android phone (Samsung, Chrome) | Demo and real mode, camera, microphone, compute, agent on the suspicious case (8/8 checks), sanction note, spoken farmer summary, decision and install as an app work end to end |
 
 Parity covers Hindi, English, Marathi, Gujarati, Telugu, Tamil, Bengali, Kannada, Malayalam, Odia, Punjabi, Urdu and Assamese. The last seven transcripts were machine-translated with Sarvam from an English plan that writes areas as numerals. They are not from native speakers.
 
-On the phone, install works: Android builds a real app from it and it opens full screen. I have not yet tested the camera and microphone on the device.
+On the phone, install works: Android builds a real app from it and it opens full screen. The camera and microphone work too. A photo of a khasra shown on a laptop screen was read correctly by both readers, and a Marathi crop plan played through laptop speakers and recorded on the phone came back as a word-perfect transcript with all three crops mapped. The farmer summary plays aloud in Marathi.
 
 ## Project structure
 
@@ -186,6 +186,10 @@ The Scale of Finance values bundled for Indore, Sehore, Ujjain, Dewas and Dhar a
 The crop calendar and district belts behind the plausibility rules are indicative. Only cotton, garlic, summer moong and soybean were checked against district sources. A plausibility flag asks the officer to look again. It never changes a limit.
 
 All land records, voices and farmers in the samples are synthetic.
+
+## Hosting limits
+
+The demo runs on the Cloudflare Workers free plan, which caps CPU time per request at 10 ms. Most pages stay well under it, but an agent run uses around 220 ms of CPU. Cloudflare has let every request through so far. If you see error 1102, retry once.
 
 ## License
 
