@@ -2,7 +2,7 @@
 
 **KCC loan appraisal for cooperative bank officers, on a phone, under the RBI KCC Directions, 2026.**
 
-[Live app](https://saakh.komalvardhan.com) · [Demo video](https://github.com/KomalSrinivasan/saakh/raw/main/docs/media/saakh-demo.mp4) · [Architecture](docs/architecture.html) · [Impact case](docs/impact-case.md) · Built for BUILD 2036 (TiE Global Summit 2026 x Hack2skill)
+[Live app](https://saakh.komalvardhan.com/?judge) · [Demo video](https://github.com/KomalSrinivasan/saakh/raw/main/docs/media/saakh-demo.mp4) · [Architecture](docs/architecture.html) · [Impact case](docs/impact-case.md) · Built for BUILD 2036 (TiE Global Summit 2026 x Hack2skill)
 
 [![Saakh demo preview](docs/media/saakh-preview.gif)](https://github.com/KomalSrinivasan/saakh/raw/main/docs/media/saakh-demo.mp4)
 
@@ -16,8 +16,8 @@ The rule behind all of it: **AI handles words. The engine handles numbers. The o
 
 ## Try it in two minutes
 
-1. Open https://saakh.komalvardhan.com on a phone or desktop. On Android, tap **Install app** to add it to the home screen.
-2. Enter any officer name and choose **Demo mode**. Three fictional farmers load, with sample land records and voice clips.
+1. Open **https://saakh.komalvardhan.com/?judge** on a phone or desktop. It skips sign-in and opens Demo mode with three fictional farmers, sample land records and voice clips. (On Android, tap **Install app** to add it to the home screen.)
+2. Prefer to sign in yourself? Open the plain URL, enter any officer name and choose **Demo mode**.
 3. Follow **How Saakh works** on the home screen. Step 4 opens Mahesh Yadav's case. Tap **Confirm and compute limit**, then **Run appraisal**. In about 12 seconds the agent flags a name mismatch and a survey number that already backs an approved loan, and recommends Review.
 4. Draft the sanction note, play the farmer summary, then approve, edit or reject. Open **Audit record** and tap **Verify chain**.
 5. Open **Validate** to run the 19 RBI calculation cases on your own device.
@@ -88,6 +88,21 @@ Right-to-left scripts (Urdu, Kashmiri, Sindhi) render per paragraph, so mixed Ur
 | Storage | Browser local storage for cases and the SHA-256 audit chain. No server database. |
 | Hosting | Cloudflare Workers through OpenNext, at https://saakh.komalvardhan.com |
 | Tests | `node:test` with 94 unit tests, plus the in-app validation pack |
+
+## Call it from another system or agent
+
+`POST /api/appraise` (tool name `appraise_kcc`) runs the same rules engine and risk checks with no model calls, so a loan origination system, an ERP or another AI agent can get a cited limit back. The request shape is the same as the agent's `request` object; the languages are optional.
+
+```bash
+curl -s https://saakh.komalvardhan.com/api/appraise -H 'content-type: application/json' -d '{"request":{
+  "evidence":{"caseId":"T1","district":"Sehore","landHa":2,"tenure":"owner","recoveryTieUp":false,
+    "applicant":{"name":"Test Farmer","village":"Ashta","surveyNos":["1/1"]},
+    "crops":[{"crop":"soybean","season":"kharif","areaHa":2},{"crop":"wheat","season":"rabi","areaHa":2}]},
+  "sof":{"soybean":{"current":55000,"source":"bank","scope":"district"},"wheat":{"current":60000,"source":"bank","scope":"district"}},
+  "portfolio":[]}}'
+```
+
+It returns `result` (yearly limits, KCC limit, each step with its RBI paragraph) and `risks` (double financing, name mismatch, crop plan checks).
 
 ## Architecture
 

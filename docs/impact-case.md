@@ -6,7 +6,7 @@ Live: https://saakh.komalvardhan.com
 
 ## The problem
 
-From 1 January 2027, every fresh KCC sanction at commercial banks, small finance banks, RRBs and rural cooperative banks falls under the RBI KCC Directions, 2026, issued on 19 June 2026 ([RBI notification](https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13522&Mode=0), [RBI Master Direction](https://rbi.org.in/ScriptS/BS_ViewMasDirections.aspx?id=13524)). Loans sanctioned earlier move to the new rules at renewal. The method for computing a limit is spelled out paragraph by paragraph: Scale of Finance times area per crop, fixed loadings for post-harvest needs and maintenance, insurance, rounding to ₹1,000, a 10% step-up each year across a six-year tenure, and separate rules for collateral, Flexi KCC and tenant farmers.
+From 1 January 2027, every fresh KCC sanction at commercial banks, small finance banks, RRBs and rural cooperative banks falls under the RBI KCC Directions, 2026, issued on 19 June 2026 ([RBI notification](https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=13522&Mode=0); Master Directions for [rural cooperative banks](https://rbi.org.in/ScriptS/BS_ViewMasDirections.aspx?id=13525) and [RRBs](https://rbi.org.in/ScriptS/BS_ViewMasDirections.aspx?id=13524)). Loans sanctioned earlier move to the new rules at renewal. The method for computing a limit is spelled out paragraph by paragraph: Scale of Finance times area per crop, fixed loadings for post-harvest needs and maintenance, insurance, rounding to ₹1,000, a 10% step-up each year across a six-year tenure, and separate rules for collateral, Flexi KCC and tenant farmers.
 
 The people who apply these rules are PACS secretaries, DCCB and RRB branch officers, and cooperative bank loan officers. They work from land records in Hindi or the local script, crop plans the farmer describes out loud, and Scale of Finance tables that are often on paper. Four things go wrong.
 
@@ -24,12 +24,14 @@ Wider context. These figures are reported, not verified by me:
 
 | Figure | Source |
 |---|---|
+| About 7.28 crore operative KCC accounts, about ₹10 lakh crore outstanding (31 Mar 2026) | [Lok Sabha AU2301](https://eparlib.sansad.in/bitstream/123456789/2994047/1/AU2301_qQqrMw.pdf) |
+| 63,428 PACS using the common ERP (July 2026) | [PIB](https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202676913301.pdf) |
 | About 351 DCCBs and StCBs and 43 RRBs are being linked to e-KCC and the PTPFC / ULI rails | [Inc42](https://inc42.com/?p=454075) |
 | The NABARD-backed e-KCC portal has onboarded 300,000+ KCC applications | [FinDev Gateway](https://www.findevgateway.org/news/nabard-backed-agri-fintech-onboards-over-300000-kisan-credit-cards) |
 | Agristack crossed 11 crore Farmer IDs in October 2026 | [Elets](https://egov.eletsonline.com/2026/10/farmer-id-11-crore-agristack-digital-agriculture-mission-target-ahead-of-schedule/) |
 | Bankers name weak land records and slow adoption as the bottleneck for ULI scale-up | [Business Standard](https://www.business-standard.com/industry/news/big-banks-slow-adoption-weak-land-records-stall-uli-scale-up-bankers-125082700907_1.html) |
 
-I did not find a sourced figure for total KCC accounts or the MP KCC portfolio, so this case does not claim a market size. I have not timed manual appraisals either, so I don't claim a before-and-after time saving.
+India had about 7.28 crore operative KCC accounts with about ₹10 lakh crore outstanding at 31 March 2026, per figures given in Parliament ([Lok Sabha AU2301](https://eparlib.sansad.in/bitstream/123456789/2994047/1/AU2301_qQqrMw.pdf)). Every one of them moves to the new limit method at its next renewal. I did not find a figure for the MP KCC portfolio, and I have not timed manual appraisals, so I don't claim a before-and-after time saving.
 
 ## Who benefits
 
@@ -95,7 +97,7 @@ KCC lending is already being digitised. Saakh does not compete with that plumbin
 | What exists | What it does | Where Saakh fits |
 |---|---|---|
 | NABARD e-KCC portal (built by 24x7 Moneyworks; over 3 lakh KCC applications onboarded at cooperative banks and RRBs) | Digital loan origination: application, documents, workflow, disbursal | Saakh computes and checks the limit inside that workflow, cited to the 2026 Directions, and hands back the figures and the audit trail |
-| e-PACS ERP (about 61,000 PACS computerised by Feb 2026) | Accounts, membership, deposits, loan ledger for PACS | The PACS secretary is Saakh's main user. Saakh runs on the same phone or PC and exports the case as JSON for the ERP. |
+| e-PACS ERP (63,428 PACS using it by July 2026) | Accounts, membership, deposits, loan ledger for PACS | The PACS secretary is Saakh's main user. Saakh runs on the same phone or PC and exports the case as JSON for the ERP. |
 | RBIH Public Tech Platform for Frictionless Credit / ULI, state land-record APIs | Fetches land records and other data by consent | Replaces Saakh's photo step once a bank has access. The engine, risk rules and audit log stay the same. |
 | Satellite and alternative-data underwriters (e.g. SatSure, Samunnati, Jai Kisan) | Scores the farm or the farmer from imagery and history | Different question. They estimate risk; Saakh computes the regulated limit and checks the file. A bank can use both. |
 
@@ -107,7 +109,7 @@ These are working assumptions, not validated with a bank yet.
 
 - **Who pays:** the lender, not the farmer. A DCCB or state cooperative bank buys Saakh for its PACS and branches. RRBs and small finance banks buy it per branch.
 - **How:** an annual licence per PACS or branch, sold through the channels that already reach them: state cooperative banks, NABARD's digitisation programmes and the e-KCC and ERP vendors.
-- **Size of the first market:** about 61,000 computerised PACS plus the branches of 28 RRBs and about 350 DCCBs. At an illustrative ₹6,000 per PACS per year, PACS alone would be about ₹37 crore a year.
+- **Size of the first market:** about 63,000 PACS on the common ERP plus the branches of 28 RRBs and about 350 DCCBs. At an illustrative ₹6,000 per PACS per year, PACS alone would be about ₹38 crore a year.
 - **Costs:** the engine runs on the device. Model and speech calls cost a few rupees per case at current Claude and Sarvam prices, and a bank can choose its own model providers.
 - **Why now:** the Directions apply to every fresh sanction from 1 January 2027, and every renewal after that moves to the new method. Lenders need the change done before then.
 
