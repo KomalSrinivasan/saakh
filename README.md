@@ -2,11 +2,11 @@
 
 **KCC loan appraisal for cooperative bank officers, on a phone, under the RBI KCC Directions, 2026.**
 
-[Live app](https://saakh.komalvardhan.com) · [Demo video](docs/media/saakh-demo.mp4) · [Architecture](docs/architecture.html) · [Impact case](docs/impact-case.md) · Built for BUILD 2036 (TiE Global Summit 2026 x Hack2skill)
+[Live app](https://saakh.komalvardhan.com) · [Demo video](https://github.com/KomalSrinivasan/saakh/raw/main/docs/media/saakh-demo.mp4) · [Architecture](docs/architecture.html) · [Impact case](docs/impact-case.md) · Built for BUILD 2036 (TiE Global Summit 2026 x Hack2skill)
 
-[![Watch the Saakh demo (1:41)](docs/media/saakh-demo.jpg)](docs/media/saakh-demo.mp4)
+[![Saakh demo preview](docs/media/saakh-preview.gif)](https://github.com/KomalSrinivasan/saakh/raw/main/docs/media/saakh-demo.mp4)
 
-<sub>Click the image to play the 1:41 demo, recorded on a Samsung Android phone against the live site. There is also a 24-second [teaser](docs/media/saakh-teaser.mp4).</sub>
+**[Watch the full 1:41 demo (MP4)](https://github.com/KomalSrinivasan/saakh/raw/main/docs/media/saakh-demo.mp4)** · [24-second teaser](https://github.com/KomalSrinivasan/saakh/raw/main/docs/media/saakh-teaser.mp4). Recorded on a Samsung Android phone against the live site.
 
 Saakh means credit, or trust, in Hindi. Today a cooperative bank, RRB or PACS officer appraising a Kisan Credit Card loan copies the land record by hand, looks up the Scale of Finance, works out six years of limits and writes the sanction note. The RBI KCC Directions, 2026 (issued 19 Jun 2026, for loans sanctioned from 1 Jan 2027) apply to all of these lenders, so each of them has to recompute limits the new way.
 
