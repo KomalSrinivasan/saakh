@@ -1,0 +1,57 @@
+{
+  "_about": "Indicative crop calendar and growing belts for Madhya Pradesh, used only to raise review flags (never to change a limit). seasons = normal; rare = grown but uncommon (medium flag); any other season = implausible (high flag). districts '*' = grown across the state. District lists are indicative belts, not exhaustive; an officer can override a low flag.",
+  "_sources": {
+    "calendar": "MP Kisan Kalyan tatha Krishi Vikas Vibhag, https://mpkrishi.mp.gov.in (standard kharif / rabi / zaid calendar). General agronomy, not district-verified.",
+    "cotton": "https://www.data.gov.in/catalog/district-wise-cotton-farming-area-madhya-pradesh ; https://www.chinimandi.com/?p=336627 (Indore division belt: Khargone, Khandwa, Barwani, Dhar, Ratlam, Dewas)",
+    "garlic": "https://mandsaur.nic.in/en/district-produce/garlic-farming/ (Mandsaur ODOP) ; https://www.downtoearth.org.in/agriculture/the-garlic-fields-of-indore ; https://www.indiastatdistricts.com/MADHYAPRADESH/neemuch/agriculture/garlic",
+    "moong": "https://www.downtoearth.org.in/agriculture/heatwaves-and-summer-moong-cultivation-arent-going-well-in-madhya-pradeshs-narmadapuram ; https://india.mongabay.com/2023/08/mp-farmers-burn-the-stubble-from-rabi-harvest-to-grow-a-third-crop-before-kharif/ (summer moong in Narmadapuram, Harda, Sehore, Raisen)",
+    "soybean": "ICAR-Indian Institute of Soybean Research, Indore, https://iisrindore.icar.gov.in (kharif crop, MP is the largest producer)"
+  },
+  "districtAliases": { "hoshangabad": "narmadapuram", "khandwa (east nimar)": "khandwa", "khargone (west nimar)": "khargone", "agar": "agar malwa" },
+  "crops": {
+    "soybean": { "seasons": ["kharif"], "rare": [], "districts": "*", "ref": "soybean" },
+    "maize": { "seasons": ["kharif"], "rare": ["rabi", "zaid"], "districts": "*", "ref": "calendar", "note": "Rabi maize is rare in MP" },
+    "cotton": {
+      "seasons": ["kharif"],
+      "rare": [],
+      "districts": ["khargone", "khandwa", "barwani", "burhanpur", "dhar", "ratlam", "dewas", "alirajpur", "jhabua", "chhindwara"],
+      "ref": "cotton",
+      "note": "Nimar and Malwa belt"
+    },
+    "wheat": { "seasons": ["rabi"], "rare": [], "districts": "*", "ref": "calendar" },
+    "gram": { "seasons": ["rabi"], "rare": [], "districts": "*", "ref": "calendar" },
+    "mustard": { "seasons": ["rabi"], "rare": [], "districts": "*", "ref": "calendar", "note": "Main belt Gwalior-Chambal, smaller area across the state" },
+    "sugarcane": {
+      "seasons": ["annual"],
+      "rare": ["kharif", "rabi"],
+      "districts": ["narsinghpur", "burhanpur", "betul", "chhindwara", "narmadapuram", "raisen", "khargone", "dhar", "seoni"],
+      "ref": "calendar",
+      "note": "Annual crop; a kharif or rabi entry usually means the planting season was given"
+    },
+    "paddy": {
+      "aliases": ["rice", "dhan", "धान", "चावल"],
+      "seasons": ["kharif"],
+      "rare": ["zaid"],
+      "districts": ["balaghat", "seoni", "mandla", "dindori", "jabalpur", "katni", "rewa", "satna", "sidhi", "singrauli", "shahdol", "umaria", "anuppur", "narmadapuram", "raisen", "sehore"],
+      "ref": "calendar"
+    },
+    "tur": { "aliases": ["arhar", "toor", "tuar", "pigeon pea", "pigeonpea", "अरहर", "तुअर", "तूर"], "seasons": ["kharif"], "rare": ["annual"], "districts": "*", "ref": "calendar" },
+    "moong": { "aliases": ["mung", "moong dal", "green gram", "greengram", "मूंग", "मूँग"], "seasons": ["kharif", "zaid"], "rare": [], "districts": "*", "ref": "moong" },
+    "urad": { "aliases": ["urd", "black gram", "blackgram", "उड़द", "उडद"], "seasons": ["kharif"], "rare": ["zaid"], "districts": "*", "ref": "calendar" },
+    "garlic": {
+      "aliases": ["lahsun", "lehsun", "lasun", "लहसुन"],
+      "seasons": ["rabi"],
+      "rare": [],
+      "districts": ["mandsaur", "neemuch", "ratlam", "ujjain", "shajapur", "agar malwa", "indore", "dhar", "rajgarh"],
+      "ref": "garlic"
+    },
+    "onion": {
+      "aliases": ["pyaz", "pyaaz", "kanda", "प्याज", "प्याज़", "कांदा"],
+      "seasons": ["rabi", "kharif"],
+      "rare": ["zaid"],
+      "districts": ["indore", "khandwa", "khargone", "ujjain", "shajapur", "dhar", "dewas", "ratlam", "sagar", "rajgarh"],
+      "ref": "calendar",
+      "note": "Main crop rabi, late-kharif onion also grown"
+    }
+  }
+}
