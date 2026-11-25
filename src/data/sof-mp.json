@@ -1,0 +1,567 @@
+[
+  {
+    "district": "Indore",
+    "crop": "soybean",
+    "aliases": [
+      "soyabean",
+      "soya",
+      "soybeans",
+      "सोयाबीन",
+      "सोया"
+    ],
+    "season": "kharif",
+    "current": 43100,
+    "previous": 42000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 862/ha at 2% (Rs 43,100); previous = Betul Kharif 2025 premium Rs 840/ha at 2% (Rs 42,000), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Indore",
+    "crop": "maize",
+    "aliases": [
+      "makka",
+      "makkai",
+      "corn",
+      "मक्का",
+      "मक्की"
+    ],
+    "season": "kharif",
+    "current": 32800,
+    "previous": 36100,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 656/ha at 2% (Rs 32,800); previous = Betul Kharif 2025 premium Rs 722/ha at 2% (Rs 36,100), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Indore",
+    "crop": "cotton",
+    "aliases": [
+      "kapas",
+      "kapaas",
+      "कपास",
+      "रुई"
+    ],
+    "season": "kharif",
+    "current": 67500,
+    "previous": 44120,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 3,375/ha at 5% commercial rate (Rs 67,500); previous = Betul Kharif 2025 premium Rs 2,206/ha at 5% (Rs 44,120), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Indore",
+    "crop": "wheat",
+    "aliases": [
+      "gehu",
+      "gehun",
+      "gehoon",
+      "गेहूं",
+      "गेहूँ",
+      "गेंहू"
+    ],
+    "season": "rabi",
+    "previous": 45000,
+    "source": "proxy-pmfby",
+    "scope": "district",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | Indore Rabi 2024-25 irrigated wheat farmer premium Rs 675/ha at 1.5% => Rs 45,000/ha (derived). Rabi 2025-26 and 2026-27 not found, so current is blank"
+  },
+  {
+    "district": "Indore",
+    "crop": "gram",
+    "aliases": [
+      "chana",
+      "channa",
+      "chickpea",
+      "bengal gram",
+      "चना"
+    ],
+    "season": "rabi",
+    "previous": 40000,
+    "source": "proxy-pmfby",
+    "scope": "district",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | Indore Rabi 2024-25 gram farmer premium Rs 600/ha at 1.5% => Rs 40,000/ha (derived). Rabi 2025-26 and 2026-27 not found, so current is blank"
+  },
+  {
+    "district": "Indore",
+    "crop": "mustard",
+    "aliases": [
+      "sarson",
+      "sarso",
+      "rai",
+      "rapeseed",
+      "सरसों",
+      "सरसो",
+      "राई"
+    ],
+    "season": "rabi",
+    "previous": 31460,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://mpbreakingnews.in/madhya-pradesh/gwalior/pradhan-mantri-fasal-bima-yojana-rabi-crop-insurance-continues-farmers-10-january-is-the-last-date-11-709496 | ESTIMATE, no Malwa district figure found. previous = Gwalior Rabi 2024-25 mustard sum insured Rs 31,460/ha as stated by DDA Gwalior. Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Indore",
+    "crop": "sugarcane",
+    "aliases": [
+      "ganna",
+      "sugar cane",
+      "गन्ना"
+    ],
+    "season": "annual",
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.hdfcergo.com/pmfby/pmfby-kharif-2026/mp | NOT FOUND: no PMFBY sum insured for sugarcane in MP was found (not in the notified crop list for the MP cluster). Left blank so the engine excludes it under para 13(4) until the bank uploads its SoF"
+  },
+  {
+    "district": "Sehore",
+    "crop": "soybean",
+    "aliases": [
+      "soyabean",
+      "soya",
+      "soybeans",
+      "सोयाबीन",
+      "सोया"
+    ],
+    "season": "kharif",
+    "current": 43100,
+    "previous": 42000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 862/ha at 2% (Rs 43,100); previous = Betul Kharif 2025 premium Rs 840/ha at 2% (Rs 42,000), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Sehore",
+    "crop": "maize",
+    "aliases": [
+      "makka",
+      "makkai",
+      "corn",
+      "मक्का",
+      "मक्की"
+    ],
+    "season": "kharif",
+    "current": 32800,
+    "previous": 36100,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 656/ha at 2% (Rs 32,800); previous = Betul Kharif 2025 premium Rs 722/ha at 2% (Rs 36,100), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Sehore",
+    "crop": "cotton",
+    "aliases": [
+      "kapas",
+      "kapaas",
+      "कपास",
+      "रुई"
+    ],
+    "season": "kharif",
+    "current": 67500,
+    "previous": 44120,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 3,375/ha at 5% commercial rate (Rs 67,500); previous = Betul Kharif 2025 premium Rs 2,206/ha at 5% (Rs 44,120), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Sehore",
+    "crop": "wheat",
+    "aliases": [
+      "gehu",
+      "gehun",
+      "gehoon",
+      "गेहूं",
+      "गेहूँ",
+      "गेंहू"
+    ],
+    "season": "rabi",
+    "previous": 45000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | ESTIMATE, no district figure found. previous = Indore Rabi 2024-25 irrigated wheat farmer premium Rs 675/ha at 1.5% (Rs 45,000). Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Sehore",
+    "crop": "gram",
+    "aliases": [
+      "chana",
+      "channa",
+      "chickpea",
+      "bengal gram",
+      "चना"
+    ],
+    "season": "rabi",
+    "previous": 40000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | ESTIMATE, no district figure found. previous = Indore Rabi 2024-25 gram farmer premium Rs 600/ha at 1.5% (Rs 40,000). Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Sehore",
+    "crop": "mustard",
+    "aliases": [
+      "sarson",
+      "sarso",
+      "rai",
+      "rapeseed",
+      "सरसों",
+      "सरसो",
+      "राई"
+    ],
+    "season": "rabi",
+    "previous": 31460,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://mpbreakingnews.in/madhya-pradesh/gwalior/pradhan-mantri-fasal-bima-yojana-rabi-crop-insurance-continues-farmers-10-january-is-the-last-date-11-709496 | ESTIMATE, no Malwa district figure found. previous = Gwalior Rabi 2024-25 mustard sum insured Rs 31,460/ha as stated by DDA Gwalior. Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Sehore",
+    "crop": "sugarcane",
+    "aliases": [
+      "ganna",
+      "sugar cane",
+      "गन्ना"
+    ],
+    "season": "annual",
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.hdfcergo.com/pmfby/pmfby-kharif-2026/mp | NOT FOUND: no PMFBY sum insured for sugarcane in MP was found (not in the notified crop list for the MP cluster). Left blank so the engine excludes it under para 13(4) until the bank uploads its SoF"
+  },
+  {
+    "district": "Ujjain",
+    "crop": "soybean",
+    "aliases": [
+      "soyabean",
+      "soya",
+      "soybeans",
+      "सोयाबीन",
+      "सोया"
+    ],
+    "season": "kharif",
+    "current": 43100,
+    "previous": 42000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 862/ha at 2% (Rs 43,100); previous = Betul Kharif 2025 premium Rs 840/ha at 2% (Rs 42,000), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Ujjain",
+    "crop": "maize",
+    "aliases": [
+      "makka",
+      "makkai",
+      "corn",
+      "मक्का",
+      "मक्की"
+    ],
+    "season": "kharif",
+    "current": 32800,
+    "previous": 36100,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 656/ha at 2% (Rs 32,800); previous = Betul Kharif 2025 premium Rs 722/ha at 2% (Rs 36,100), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Ujjain",
+    "crop": "cotton",
+    "aliases": [
+      "kapas",
+      "kapaas",
+      "कपास",
+      "रुई"
+    ],
+    "season": "kharif",
+    "current": 67500,
+    "previous": 44120,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 3,375/ha at 5% commercial rate (Rs 67,500); previous = Betul Kharif 2025 premium Rs 2,206/ha at 5% (Rs 44,120), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Ujjain",
+    "crop": "wheat",
+    "aliases": [
+      "gehu",
+      "gehun",
+      "gehoon",
+      "गेहूं",
+      "गेहूँ",
+      "गेंहू"
+    ],
+    "season": "rabi",
+    "previous": 45000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | ESTIMATE, no district figure found. previous = Indore Rabi 2024-25 irrigated wheat farmer premium Rs 675/ha at 1.5% (Rs 45,000). Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Ujjain",
+    "crop": "gram",
+    "aliases": [
+      "chana",
+      "channa",
+      "chickpea",
+      "bengal gram",
+      "चना"
+    ],
+    "season": "rabi",
+    "previous": 40000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | ESTIMATE, no district figure found. previous = Indore Rabi 2024-25 gram farmer premium Rs 600/ha at 1.5% (Rs 40,000). Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Ujjain",
+    "crop": "mustard",
+    "aliases": [
+      "sarson",
+      "sarso",
+      "rai",
+      "rapeseed",
+      "सरसों",
+      "सरसो",
+      "राई"
+    ],
+    "season": "rabi",
+    "previous": 31460,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://mpbreakingnews.in/madhya-pradesh/gwalior/pradhan-mantri-fasal-bima-yojana-rabi-crop-insurance-continues-farmers-10-january-is-the-last-date-11-709496 | ESTIMATE, no Malwa district figure found. previous = Gwalior Rabi 2024-25 mustard sum insured Rs 31,460/ha as stated by DDA Gwalior. Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Ujjain",
+    "crop": "sugarcane",
+    "aliases": [
+      "ganna",
+      "sugar cane",
+      "गन्ना"
+    ],
+    "season": "annual",
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.hdfcergo.com/pmfby/pmfby-kharif-2026/mp | NOT FOUND: no PMFBY sum insured for sugarcane in MP was found (not in the notified crop list for the MP cluster). Left blank so the engine excludes it under para 13(4) until the bank uploads its SoF"
+  },
+  {
+    "district": "Dewas",
+    "crop": "soybean",
+    "aliases": [
+      "soyabean",
+      "soya",
+      "soybeans",
+      "सोयाबीन",
+      "सोया"
+    ],
+    "season": "kharif",
+    "previous": 45000,
+    "source": "proxy-pmfby",
+    "scope": "district",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-by-july-31-and-get-security-cover/ | Dewas Kharif 2024 farmer premium Rs 900/ha at 2% => Rs 45,000/ha (derived). Latest Dewas figure found; Kharif 2025 and 2026 not found, so current is blank"
+  },
+  {
+    "district": "Dewas",
+    "crop": "maize",
+    "aliases": [
+      "makka",
+      "makkai",
+      "corn",
+      "मक्का",
+      "मक्की"
+    ],
+    "season": "kharif",
+    "previous": 24000,
+    "source": "proxy-pmfby",
+    "scope": "district",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-by-july-31-and-get-security-cover/ | Dewas Kharif 2024 farmer premium Rs 480/ha at 2% => Rs 24,000/ha (derived). Latest Dewas figure found; Kharif 2025 and 2026 not found, so current is blank"
+  },
+  {
+    "district": "Dewas",
+    "crop": "cotton",
+    "aliases": [
+      "kapas",
+      "kapaas",
+      "कपास",
+      "रुई"
+    ],
+    "season": "kharif",
+    "current": 67500,
+    "previous": 44120,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | ESTIMATE, no district figure found. current = Dhar Kharif 2026 farmer premium Rs 3,375/ha at 5% commercial rate (Rs 67,500); previous = Betul Kharif 2025 premium Rs 2,206/ha at 5% (Rs 44,120), https://www.betulupdate.com/pm-crop-insurance-scheme-kharif-2025-premium/"
+  },
+  {
+    "district": "Dewas",
+    "crop": "wheat",
+    "aliases": [
+      "gehu",
+      "gehun",
+      "gehoon",
+      "गेहूं",
+      "गेहूँ",
+      "गेंहू"
+    ],
+    "season": "rabi",
+    "previous": 45000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | ESTIMATE, no district figure found. previous = Indore Rabi 2024-25 irrigated wheat farmer premium Rs 675/ha at 1.5% (Rs 45,000). Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Dewas",
+    "crop": "gram",
+    "aliases": [
+      "chana",
+      "channa",
+      "chickpea",
+      "bengal gram",
+      "चना"
+    ],
+    "season": "rabi",
+    "previous": 40000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | ESTIMATE, no district figure found. previous = Indore Rabi 2024-25 gram farmer premium Rs 600/ha at 1.5% (Rs 40,000). Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Dewas",
+    "crop": "mustard",
+    "aliases": [
+      "sarson",
+      "sarso",
+      "rai",
+      "rapeseed",
+      "सरसों",
+      "सरसो",
+      "राई"
+    ],
+    "season": "rabi",
+    "previous": 31460,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://mpbreakingnews.in/madhya-pradesh/gwalior/pradhan-mantri-fasal-bima-yojana-rabi-crop-insurance-continues-farmers-10-january-is-the-last-date-11-709496 | ESTIMATE, no Malwa district figure found. previous = Gwalior Rabi 2024-25 mustard sum insured Rs 31,460/ha as stated by DDA Gwalior. Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Dewas",
+    "crop": "sugarcane",
+    "aliases": [
+      "ganna",
+      "sugar cane",
+      "गन्ना"
+    ],
+    "season": "annual",
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.hdfcergo.com/pmfby/pmfby-kharif-2026/mp | NOT FOUND: no PMFBY sum insured for sugarcane in MP was found (not in the notified crop list for the MP cluster). Left blank so the engine excludes it under para 13(4) until the bank uploads its SoF"
+  },
+  {
+    "district": "Dhar",
+    "crop": "soybean",
+    "aliases": [
+      "soyabean",
+      "soya",
+      "soybeans",
+      "सोयाबीन",
+      "सोया"
+    ],
+    "season": "kharif",
+    "current": 43100,
+    "source": "proxy-pmfby",
+    "scope": "district",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | Dhar Kharif 2026 farmer premium Rs 862/ha at 2% => Rs 43,100/ha (derived). Kharif 2025 Dhar value not found"
+  },
+  {
+    "district": "Dhar",
+    "crop": "maize",
+    "aliases": [
+      "makka",
+      "makkai",
+      "corn",
+      "मक्का",
+      "मक्की"
+    ],
+    "season": "kharif",
+    "current": 32800,
+    "source": "proxy-pmfby",
+    "scope": "district",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | Dhar Kharif 2026 farmer premium Rs 656/ha at 2% => Rs 32,800/ha (derived). Kharif 2025 Dhar value not found"
+  },
+  {
+    "district": "Dhar",
+    "crop": "cotton",
+    "aliases": [
+      "kapas",
+      "kapaas",
+      "कपास",
+      "रुई"
+    ],
+    "season": "kharif",
+    "current": 67500,
+    "source": "proxy-pmfby",
+    "scope": "district",
+    "ref": "https://www.krishakjagat.org/news/pradhan-mantri-fasal-bima-yojana-implemented-in-7-districts-of-madhya-pradesh-for-kharif-2026/ | Dhar Kharif 2026 farmer premium Rs 3,375/ha at 5% commercial rate => Rs 67,500/ha (derived). Kharif 2025 Dhar value not found"
+  },
+  {
+    "district": "Dhar",
+    "crop": "wheat",
+    "aliases": [
+      "gehu",
+      "gehun",
+      "gehoon",
+      "गेहूं",
+      "गेहूँ",
+      "गेंहू"
+    ],
+    "season": "rabi",
+    "previous": 45000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | ESTIMATE, no district figure found. previous = Indore Rabi 2024-25 irrigated wheat farmer premium Rs 675/ha at 1.5% (Rs 45,000). Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Dhar",
+    "crop": "gram",
+    "aliases": [
+      "chana",
+      "channa",
+      "chickpea",
+      "bengal gram",
+      "चना"
+    ],
+    "season": "rabi",
+    "previous": 40000,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.krishakjagat.org/news/get-crop-insurance-to-avoid-risks-in-crops-2/ | ESTIMATE, no district figure found. previous = Indore Rabi 2024-25 gram farmer premium Rs 600/ha at 1.5% (Rs 40,000). Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Dhar",
+    "crop": "mustard",
+    "aliases": [
+      "sarson",
+      "sarso",
+      "rai",
+      "rapeseed",
+      "सरसों",
+      "सरसो",
+      "राई"
+    ],
+    "season": "rabi",
+    "previous": 31460,
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://mpbreakingnews.in/madhya-pradesh/gwalior/pradhan-mantri-fasal-bima-yojana-rabi-crop-insurance-continues-farmers-10-january-is-the-last-date-11-709496 | ESTIMATE, no Malwa district figure found. previous = Gwalior Rabi 2024-25 mustard sum insured Rs 31,460/ha as stated by DDA Gwalior. Rabi 2025-26 and 2026-27 values not found, so current is left blank"
+  },
+  {
+    "district": "Dhar",
+    "crop": "sugarcane",
+    "aliases": [
+      "ganna",
+      "sugar cane",
+      "गन्ना"
+    ],
+    "season": "annual",
+    "source": "proxy-pmfby",
+    "scope": "state",
+    "ref": "https://www.hdfcergo.com/pmfby/pmfby-kharif-2026/mp | NOT FOUND: no PMFBY sum insured for sugarcane in MP was found (not in the notified crop list for the MP cluster). Left blank so the engine excludes it under para 13(4) until the bank uploads its SoF"
+  }
+]
